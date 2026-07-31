@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/kien-thuc-can-biet/:slug", "destination": "/api/render-article" },
+    { "source": "/tri/:slug", "destination": "/api/render-article" },
+    { "source": "/dinh-chi-thai/:slug", "destination": "/api/render-article" },
+    { "source": "/bao-quy-dau/:slug", "destination": "/api/render-article" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ]
+}
