@@ -54,6 +54,6 @@ module.exports = async function handler(req, res) {
         return res.status(200).send(finalHtml);
     } catch (error) {
         console.error("Vercel Function Crash:", error.stack);
-        return buildErrorResponse(res, 503, "Dịch vụ tạm thời gián đoạn");
+        return res.status(503).send(`<h1>503 - Dịch vụ tạm thời gián đoạn</h1><p>Vui lòng thử lại sau.</p><pre style="background:#eee;padding:15px;overflow:auto;">${error.stack}</pre>`);
     }
 }
