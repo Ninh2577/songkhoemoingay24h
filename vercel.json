@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "chi-tiet-bai-viet.html"
+    }
+  },
   "rewrites": [
     { "source": "/", "destination": "/home.html" },
     { "source": "/blog", "destination": "/blog.html" },

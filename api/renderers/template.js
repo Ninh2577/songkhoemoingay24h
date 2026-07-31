@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const CONFIG = require('../config');
 
@@ -7,7 +8,8 @@ let cachedTemplate = null;
 function getTemplate() {
     if (cachedTemplate) return cachedTemplate;
     try {
-        cachedTemplate = fs.readFileSync(CONFIG.HTML_TEMPLATE_PATH, 'utf8');
+        // Must use path.join(__dirname) directly inside readFileSync for Vercel NFT to bundle it
+        cachedTemplate = fs.readFileSync(path.join(__dirname, '../../chi-tiet-bai-viet.html'), 'utf8');
         return cachedTemplate;
     } catch (err) {
         console.error("Template loading failed", err);
