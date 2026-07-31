@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6" />
+      <stop offset="100%" stop-color="#15803d" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="15" stdDeviation="15" flood-color="#15803d" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <path d="M480,32 C480,32 400,24 296,80 C192,136 128,240 112,328 C104,372 108,416 128,456 L48,496 C48,496 56,512 72,512 C88,512 112,504 112,504 L176,448 C224,472 288,480 344,456 C448,408 504,288 504,168 C504,80 480,32 480,32 Z M352,248 C280,320 184,336 184,336 C184,336 216,248 288,176 C360,104 432,104 432,104 C432,104 424,176 352,248 Z" 
+        fill="url(#leafGrad)" filter="url(#shadow)" />
+</svg>
