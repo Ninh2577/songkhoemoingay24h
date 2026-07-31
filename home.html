@@ -13,27 +13,50 @@ rel="stylesheet" />
 </head>
 <body>
 <div class="skmd-wrap">
-<header class="header" id="skmd-header">
-<div class="container header__inner">
-<a href="#skmd-hero" class="logo">
-<img id="skmd-header-logo" src="" alt="Logo"
-style="width: 36px; height: 36px; border-radius: 8px; object-fit: contain; display: none;"
-onload="this.style.display='block'" onerror="this.style.display='none'" />
-<div>
-<span class="logo__name">Sống Khỏe</span>
-<span class="logo__sub">Mỗi Ngày</span>
+<header class="skmd-header" id="skmd-header">
+<div class="skmd-container skmd-header__inner">
+<a href="/" class="skmd-logo">
+<img id="skmd-header-logo" src="" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px; object-fit: contain; display: none;" onload="this.style.display='block'" onerror="this.style.display='none'" />
+<div class="skmd-logo__text">
+<span class="skmd-logo__name">Sống Khỏe</span>
+<span class="skmd-logo__sub">Mỗi Ngày</span>
 </div>
 </a>
-<nav class="nav">
-<a href="/" class="nav__link active">Trang chủ</a>
-<a href="/kien-thuc-can-biet" class="nav__link">Kiến thức cần biết</a>
-<a href="/tri" class="nav__link">Trĩ</a>
-<a href="/dinh-chi-thai" class="nav__link">Đình chỉ thai</a>
-<a href="/bao-quy-dau" class="nav__link">Bao quy đầu</a>
+<nav class="skmd-nav">
+<a href="/" class="skmd-nav__link is-active">Trang chủ</a>
+<a href="/kien-thuc-can-biet" class="skmd-nav__link">Kiến thức</a>
+<a href="/tri" class="skmd-nav__link">Trĩ</a>
+<a href="/dinh-chi-thai" class="skmd-nav__link">Đình chỉ thai</a>
+<a href="/bao-quy-dau" class="skmd-nav__link">Bao quy đầu</a>
 </nav>
-<a href="/blog" class="btn btn--outline header__cta">Đọc Bài Viết</a>
+<div class="skmd-header__actions">
+<a href="/blog" class="skmd-btn skmd-btn--primary">Đọc Bài Viết</a>
+<button id="skmd-hamburger" class="skmd-hamburger" aria-label="Menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+</div>
 </div>
 </header>
+
+<div id="skmd-overlay" class="skmd-overlay"></div>
+<div id="skmd-drawer" class="skmd-drawer" aria-hidden="true">
+<div class="skmd-drawer__header">
+<a href="/" class="skmd-logo">
+<div class="skmd-logo__text">
+<span class="skmd-logo__name">Sống Khỏe</span>
+<span class="skmd-logo__sub">Mỗi Ngày</span>
+</div>
+</a>
+<button id="skmd-drawer-close" class="skmd-drawer__close" aria-label="Đóng Menu"><i class="ri-close-line"></i></button>
+</div>
+<nav class="skmd-drawer__nav">
+<a href="/">Trang chủ</a>
+<a href="/kien-thuc-can-biet">Kiến thức</a>
+<a href="/tri">Trĩ</a>
+<a href="/dinh-chi-thai">Đình chỉ thai</a>
+<a href="/bao-quy-dau">Bao quy đầu</a>
+</nav>
+</div>
 <section class="hero" id="skmd-hero">
 <div class="container hero__inner">
 <div class="hero__content fade-in">
@@ -202,8 +225,54 @@ style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" alt="T
 </div>
 </div>
 </section>
-thông tin, không nhằm mục đích thay thế cho tư vấn, chẩn đoán hay điều trị y khoa chuyên nghiệp.
+<footer class="skmd-footer">
+<div class="skmd-container skmd-footer__inner">
+<div class="skmd-footer__brand">
+<a href="/" class="skmd-logo">
+<img id="skmd-footer-logo" src="" alt="Logo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: contain; display: none;" onload="this.style.display='block'" onerror="this.style.display='none'" />
+<div class="skmd-logo__text">
+<span class="skmd-logo__name" style="color:#fff">Sống Khỏe</span>
+<span class="skmd-logo__sub" style="color:var(--color-primary-light)">Mỗi Ngày</span>
 </div>
+</a>
+<p>Sứ mệnh giúp mỗi người Việt sống khỏe hơn, hạnh phúc hơn mỗi ngày.</p>
+<div class="skmd-footer__social">
+<a href="#"><i class="ri-facebook-fill"></i></a>
+<a href="#"><i class="ri-youtube-fill"></i></a>
+<a href="#"><i class="ri-tiktok-fill"></i></a>
+</div>
+</div>
+<div>
+<h4 class="skmd-footer__heading">Chuyên Mục</h4>
+<nav class="skmd-footer__nav">
+<a href="/kien-thuc-can-biet">Kiến thức</a>
+<a href="/tri">Trĩ</a>
+<a href="/dinh-chi-thai">Đình chỉ thai</a>
+<a href="/bao-quy-dau">Bao quy đầu</a>
+</nav>
+</div>
+<div>
+<h4 class="skmd-footer__heading">Về Chúng Tôi</h4>
+<nav class="skmd-footer__nav">
+<a href="#">Giới Thiệu</a>
+<a href="#">Đội Ngũ Chuyên Gia</a>
+<a href="#">Chính Sách Bảo Mật</a>
+<a href="#">Liên Hệ</a>
+</nav>
+</div>
+<div>
+<h4 class="skmd-footer__heading">Liên Hệ</h4>
+<nav class="skmd-footer__nav">
+<span class="skmd-footer__contact" style="color:rgba(255,255,255,0.6);font-size:0.85rem;margin-bottom:8px;display:block;"><i class="ri-map-pin-line"></i> Hà Nội, Việt Nam</span>
+<span class="skmd-footer__contact" style="color:rgba(255,255,255,0.6);font-size:0.85rem;margin-bottom:8px;display:block;"><i class="ri-phone-line"></i> 1900 xxxx</span>
+<span class="skmd-footer__contact" style="color:rgba(255,255,255,0.6);font-size:0.85rem;margin-bottom:8px;display:block;"><i class="ri-mail-line"></i> contact@songkhoemoingay.vn</span>
+</nav>
+</div>
+</div>
+<div class="skmd-footer__bottom">
+<div class="skmd-container">
+<p>© 2025 Sống Khỏe Mỗi Ngày. Bảo lưu mọi quyền.</p>
+<p class="skmd-footer__disclaimer"><i class="ri-medicine-bottle-fill"></i> Nội dung chỉ mang tính tham khảo, không thay thế tư vấn y tế chuyên nghiệp.</p>
 </div>
 </div>
 </footer>
@@ -433,6 +502,64 @@ const schema = {
 skmdInjectSchemaGraph(schema, 'skmd-schema-home');
 }
 setTimeout(skmdGenerateHomeSchema, 1000);
+
+function initMobileMenu() {
+const btn = document.getElementById('skmd-hamburger');
+const closeBtn = document.getElementById('skmd-drawer-close');
+const drawer = document.getElementById('skmd-drawer');
+const overlay = document.getElementById('skmd-overlay');
+if (!btn || !drawer || !overlay) return;
+let scrollPosition = 0;
+function openMenu() {
+scrollPosition = window.pageYOffset;
+document.body.style.top = `-${scrollPosition}px`;
+document.body.classList.add('menu-open');
+document.body.style.position = 'fixed';
+document.body.style.width = '100%';
+btn.classList.add('is-active');
+btn.setAttribute('aria-expanded', 'true');
+drawer.classList.add('is-active');
+drawer.setAttribute('aria-hidden', 'false');
+overlay.classList.add('is-active');
+setTimeout(() => { if (closeBtn) closeBtn.focus(); }, 100);
+}
+function closeMenu() {
+document.body.classList.remove('menu-open');
+document.body.style.position = '';
+document.body.style.top = '';
+document.body.style.width = '';
+window.scrollTo(0, scrollPosition);
+btn.classList.remove('is-active');
+btn.setAttribute('aria-expanded', 'false');
+drawer.classList.remove('is-active');
+drawer.setAttribute('aria-hidden', 'true');
+overlay.classList.remove('is-active');
+btn.focus();
+}
+btn.addEventListener('click', () => {
+if (drawer.classList.contains('is-active')) {
+closeMenu();
+} else {
+openMenu();
+}
+});
+if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && drawer.classList.contains('is-active')) {
+closeMenu();
+}
+});
+}
+initMobileMenu();
+
+const header = document.getElementById('skmd-header');
+if (header) {
+window.addEventListener('scroll', () => {
+if (window.scrollY > 50) header.classList.add('skmd-header--scrolled');
+else header.classList.remove('skmd-header--scrolled');
+});
+}
 })();
 </script>
 </body>
