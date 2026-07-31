@@ -1,5 +1,11 @@
 {
   "rewrites": [
+    { "source": "/", "destination": "/home.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/kien-thuc-can-biet", "destination": "/blog.html" },
+    { "source": "/tri", "destination": "/blog.html" },
+    { "source": "/dinh-chi-thai", "destination": "/blog.html" },
+    { "source": "/bao-quy-dau", "destination": "/blog.html" },
     { "source": "/kien-thuc-can-biet/:slug", "destination": "/api/render-article" },
     { "source": "/tri/:slug", "destination": "/api/render-article" },
     { "source": "/dinh-chi-thai/:slug", "destination": "/api/render-article" },
