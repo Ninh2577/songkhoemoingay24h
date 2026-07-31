@@ -13,7 +13,7 @@ const CONFIG = {
     },
     TIMEOUT_MS: 5000,
     RETRY_LIMIT: 2,
-    HTML_TEMPLATE_PATH: path.join(process.cwd(), 'chi-tiet-bai-viet.html')
+    HTML_TEMPLATE_PATH: path.join(__dirname, '../../chi-tiet-bai-viet.html')
 };
 
 module.exports = CONFIG;
