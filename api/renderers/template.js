@@ -36,8 +36,8 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
     ${hydrationScript}
     `;
 
-    // Inject at the very beginning
-    html = injectionBlock + html;
+    // Inject inside <head>
+    html = html.replace('</head>', injectionBlock + '\n</head>');
 
     // Inject Content
     const contentToInject = `<article class="art-content" id="skmd-html-content">${article.contentHtml}</article>`;
