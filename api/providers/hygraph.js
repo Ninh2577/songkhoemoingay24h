@@ -44,14 +44,14 @@ async function fetchWithRetry(url, options = {}, retries = CONFIG.RETRY_LIMIT) {
 async function getArticleBySlug(slug) {
     const QUERY = `
         query GetArticle($slug: String!) {
-            baiViet(where: { slug: $slug }) {
+            baiViets(where: { slug: $slug }, first: 1) {
                 id
-                tieuDe
+                title
                 slug
-                tomTat
+                tomtat
                 danhmuc
-                anhBia { url }
-                tacGia { ten }
+                anh { url }
+                tacGia
                 createdAt
                 updatedAt
                 noiDung { html }
@@ -75,7 +75,7 @@ async function getArticleBySlug(slug) {
         throw new Error("GraphQL Error from Hygraph");
     }
 
-    return data.data?.baiViet || null;
+    return data.data?.baiViets?.[0] || null;
 }
 
 module.exports = {
