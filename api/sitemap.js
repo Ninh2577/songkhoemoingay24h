@@ -49,7 +49,7 @@ module.exports = async function handler(req, res) {
     for (const post of posts) {
       const catSlug = skmdCatSlug(post.danhmuc);
       xml += `  <url>\n`;
-      xml += `    <loc>${domain}/${catSlug}/${post.slug}</loc>\n`;
+      xml += `    <loc>${domain}/${post.slug}</loc>\n`;
       if (post.updatedAt) xml += `    <lastmod>${post.updatedAt.split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;

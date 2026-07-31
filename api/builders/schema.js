@@ -1,7 +1,7 @@
 const CONFIG = require('../config');
 
 function buildSchemaScript(article) {
-    const url = `${CONFIG.SITE_URL}/${article.category.slug}/${article.slug}`;
+    const url = `${CONFIG.SITE_URL}/${article.slug}`;
     const imageUrl = article.coverImage || CONFIG.DEFAULT_OG_IMAGE;
 
     const schema = {

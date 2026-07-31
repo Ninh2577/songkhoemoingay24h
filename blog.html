@@ -223,7 +223,7 @@ const imgBg = post.anh && post.anh.url
 ? `<img src="${post.anh.url}" alt="${post.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />`
 : `<span style="font-size:5rem">${skmdEmoji(post.danhmuc)}</span>`;
 return `
-<a href="/${skmdCatSlug(post.danhmuc)}/${post.slug}" class="art-featured">
+<a href="/${post.slug}" class="art-featured">
 <div class="art-featured-img" style="background:${skmdGradient(post.danhmuc, idx)}">
 <span class="art-featured-badge">⭐ Nổi Bật</span>
 ${imgBg}
@@ -247,7 +247,7 @@ const imgBg = post.anh && post.anh.url
 ? `<img src="${post.anh.url}" alt="${post.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />`
 : `<span style="font-size:3rem">${skmdEmoji(post.danhmuc)}</span>`;
 return `
-<a href="/${skmdCatSlug(post.danhmuc)}/${post.slug}" class="art-card">
+<a href="/${post.slug}" class="art-card">
 <div class="art-card-img" style="background:${skmdGradient(post.danhmuc, idx)}">
 ${imgBg}
 </div>

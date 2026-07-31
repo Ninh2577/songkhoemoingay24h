@@ -265,7 +265,7 @@ const imgBg = post.anh && post.anh.url
 ? `<img src="${post.anh.url}" alt="${post.title}" loading="lazy" />`
 : `<span style="font-size:${isLarge ? '5rem' : '3rem'}">${skmdEmoji(post.danhmuc)}</span>`;
 const cardHtml = `
-<article class="article-card ${isLarge ? 'article-card--large' : ''}" style="cursor:pointer" onclick="window.location.href='/${skmdCatSlug(post.danhmuc)}/${post.slug}'">
+<article class="article-card ${isLarge ? 'article-card--large' : ''}" style="cursor:pointer" onclick="window.location.href='/${post.slug}'">
 <div class="article-card__img">
 ${imgBg}
 </div>
