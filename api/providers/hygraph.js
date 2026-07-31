@@ -16,7 +16,8 @@ async function fetchWithRetry(url, options = {}, retries = CONFIG.RETRY_LIMIT) {
         clearTimeout(id);
         
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errText = await response.text();
+            throw new Error(`HTTP error! status: ${response.status} body: ${errText}`);
         }
         
         return await response.json();
