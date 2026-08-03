@@ -2529,3 +2529,17 @@ body.menu-open {
   animation: skmdSpin 1s infinite linear;
   margin: 0 auto var(--space-4);
 }
+
+/* ==========================================================================
+   14. FOOTER ADJUSTMENTS (SATELLITE SITE)
+   ========================================================================== */
+.skmd-footer__inner {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr !important;
+  gap: var(--space-8);
+}
+@media (max-width: 768px) {
+  .skmd-footer__inner {
+    grid-template-columns: 1fr !important;
+  }
+}
