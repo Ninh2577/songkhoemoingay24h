@@ -12,6 +12,6 @@
     { "source": "/dinh-chi-thai", "destination": "/blog.html" },
     { "source": "/bao-quy-dau", "destination": "/blog.html" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/:slug", "destination": "/api/render-article" }
+    { "source": "/:slug([^.]+)", "destination": "/api/render-article" }
   ]
 }

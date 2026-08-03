@@ -58,7 +58,7 @@
 <section class="hero" id="skmd-hero">
 <div class="skmd-container hero__inner">
 <div class="hero__content fade-in">
-<span class="badge"><i class="ri-sparkling-fill"></i> Tạp Chí Sức Khỏe</span>
+<span class="skmd-badge skmd-badge--primary" style="background: rgba(255,255,255,0.2); color: #fff; backdrop-filter: blur(10px);"><i class="ri-sparkling-fill"></i> Tạp Chí Sức Khỏe</span>
 <h1 class="hero__title">
 Kiến thức chuẩn y khoa cho<br />
 <span style="color:var(--color-primary)">cuộc sống khỏe mạnh</span>
@@ -67,36 +67,30 @@ Kiến thức chuẩn y khoa cho<br />
 được đội ngũ chuyên gia và bác sĩ của chúng tôi biên tập mỗi ngày.</p>
 <div class="hero__actions">
 <a href="#skmd-articles" class="skmd-btn skmd-btn--primary hover-lift">Đọc Bài Mới Nhất</a>
-<a href="/blog" class="skmd-btn skmd-btn--ghost hover-lift">Khám Phá Chuyên Mục</a>
+<a href="/blog" class="skmd-btn skmd-btn--outline">Khám Phá Chuyên Mục</a>
 </div>
 
-<div class="skmd-grid-3">
-<a href="/sinh-ly-nam" class="skmd-cat-card">
-<img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=800" alt="Sinh lý nam" class="skmd-cat-card__bg" loading="lazy" />
-<div class="skmd-cat-card__overlay">
-<span class="skmd-cat-card__badge">Chuyên sâu</span>
-<h3 class="skmd-cat-card__title">Sinh Lý Nam</h3>
-<p class="skmd-cat-card__desc">Giải pháp toàn diện bảo vệ bản lĩnh phái mạnh.</p>
-<div class="skmd-cat-card__link">Khám phá ngay <i class="ri-arrow-right-line"></i></div>
+<div class="hero-features-grid">
+<a href="/sinh-ly-nam" class="hero-feature-card">
+<div class="hero-feature-card__icon">
+<img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=200" alt="Sinh lý nam" loading="lazy" />
 </div>
+<h4>Sinh Lý Nam</h4>
+<p>Chuyên sâu</p>
 </a>
-<a href="/vo-sinh" class="skmd-cat-card">
-<img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=800" alt="Vô sinh" class="skmd-cat-card__bg" loading="lazy" />
-<div class="skmd-cat-card__overlay">
-<span class="skmd-cat-card__badge">Khoa học</span>
-<h3 class="skmd-cat-card__title">Vô Sinh & Hiếm Muộn</h3>
-<p class="skmd-cat-card__desc">Kiến thức y khoa chuẩn xác về sức khỏe sinh sản.</p>
-<div class="skmd-cat-card__link">Tìm hiểu thêm <i class="ri-arrow-right-line"></i></div>
+<a href="/vo-sinh" class="hero-feature-card">
+<div class="hero-feature-card__icon">
+<img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=200" alt="Vô sinh" loading="lazy" />
 </div>
+<h4>Vô Sinh</h4>
+<p>Hiếm muộn</p>
 </a>
-<a href="/benh-xa-hoi" class="skmd-cat-card">
-<img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=800" alt="Bệnh xã hội" class="skmd-cat-card__bg" loading="lazy" />
-<div class="skmd-cat-card__overlay">
-<span class="skmd-cat-card__badge">Phòng ngừa</span>
-<h3 class="skmd-cat-card__title">Bệnh Xã Hội</h3>
-<p class="skmd-cat-card__desc">Cách nhận biết, phòng tránh và bảo vệ bản thân.</p>
-<div class="skmd-cat-card__link">Đọc bài viết <i class="ri-arrow-right-line"></i></div>
+<a href="/benh-xa-hoi" class="hero-feature-card">
+<div class="hero-feature-card__icon">
+<img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=200" alt="Bệnh xã hội" loading="lazy" />
 </div>
+<h4>Bệnh Xã Hội</h4>
+<p>Phòng ngừa</p>
 </a>
 </div>
 
@@ -115,7 +109,7 @@ alt="Lối sống khỏe mạnh" loading="lazy">
 </div>
 </section>
 <div class="ticker">
-<div class="container" style="display:flex;align-items:center;">
+<div class="skmd-container" style="display:flex;align-items:center;">
 <div class="ticker__label">MỚI NHẤT</div>
 <div style="overflow:hidden;flex:1;">
 <div class="ticker__content">
@@ -135,9 +129,9 @@ mỡ an toàn</a>
 </div>
 </div>
 <section class="section articles" id="skmd-articles">
-<div class="container">
+<div class="skmd-container">
 <div class="section__head">
-<span class="badge">Bài Viết Nổi Bật</span>
+<span class="skmd-badge skmd-badge--primary">Bài Viết Nổi Bật</span>
 <h2 class="section__title">Kiến Thức Sức Khỏe Mới Nhất</h2>
 <p class="section__desc">Cập nhật những thông tin sức khỏe chính xác, khoa học và dễ áp dụng hàng ngày.
 </p>
@@ -151,12 +145,12 @@ style="width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: #
 </div>
 </div>
 <div class="articles__more">
-<a href="/blog" class="btn btn--outline" id="load-more-btn">Xem Tất Cả Bài Viết →</a>
+<a href="/blog" class="skmd-btn skmd-btn--outline" id="load-more-btn">Xem Tất Cả Bài Viết →</a>
 </div>
 </div>
 </section>
 <section class="section" id="skmd-tips">
-<div class="container">
+<div class="skmd-container">
 <div class="section__head" style="text-align: center; margin: 0 auto var(--space-12) auto;">
 <h2 class="section__title">Thói Quen Sống Khỏe</h2>
 <p class="section__desc" style="text-align: center;">Những nguyên tắc đơn giản nhưng mang lại hiệu quả
