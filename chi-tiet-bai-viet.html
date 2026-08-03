@@ -36,7 +36,7 @@ viết đã bị xóa.</p>
 </a>
 <nav class="skmd-nav">
 <a href="/" class="skmd-nav__link">Trang chủ</a>
-<a href="/kien-thuc-can-biet" class="skmd-nav__link is-active">Kiến thức</a>
+<a href="/kien-thuc-can-biet" class="skmd-nav__link">Kiến thức</a>
 <a href="/tri" class="skmd-nav__link">Trĩ</a>
 <a href="/dinh-chi-thai" class="skmd-nav__link">Đình chỉ thai</a>
 <a href="/bao-quy-dau" class="skmd-nav__link">Bao quy đầu</a>
@@ -448,6 +448,16 @@ document.getElementById('skmd-summary').textContent = post.tomtat || "Bài viế
 document.getElementById('skmd-cat-crumb').textContent = skmdCatName(post.danhmuc);
 document.getElementById('skmd-date-updated').textContent = formatDate(post.createdAt);
 const authorName = post.tacGia || "Ban Biên Tập";
+
+// Highlight correct nav item based on article category
+const catSlug = skmdCatSlug(post.danhmuc);
+document.querySelectorAll('.skmd-nav__link, .skmd-drawer__nav a').forEach(link => {
+    link.classList.remove('is-active');
+    const linkPath = link.getAttribute('href').toLowerCase();
+    if (linkPath === '/' + catSlug) {
+        link.classList.add('is-active');
+    }
+});
 const initials = skmdInitials(authorName);
 document.getElementById('skmd-author1').textContent = authorName;
 document.getElementById('skmd-av1').textContent = initials;

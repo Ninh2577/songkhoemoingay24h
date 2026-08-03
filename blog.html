@@ -24,7 +24,7 @@ rel="stylesheet" />
 </a>
 <nav class="skmd-nav">
 <a href="/" class="skmd-nav__link">Trang chủ</a>
-<a href="/kien-thuc-can-biet" class="skmd-nav__link is-active">Kiến thức</a>
+<a href="/kien-thuc-can-biet" class="skmd-nav__link">Kiến thức</a>
 <a href="/tri" class="skmd-nav__link">Trĩ</a>
 <a href="/dinh-chi-thai" class="skmd-nav__link">Đình chỉ thai</a>
 <a href="/bao-quy-dau" class="skmd-nav__link">Bao quy đầu</a>
@@ -575,6 +575,23 @@ closeMenu();
 });
 }
 initMobileMenu();
+
+// Dynamic active state for navigation based on URL
+function skmdSetActiveNav() {
+  const currentPath = window.location.pathname.toLowerCase();
+  document.querySelectorAll('.skmd-nav__link, .skmd-drawer__nav a').forEach(link => {
+    const linkPath = link.getAttribute('href').toLowerCase();
+    // Remove existing active states
+    link.classList.remove('is-active');
+    
+    // Exact match or sub-path match (but don't match '/' for everything)
+    if (currentPath === linkPath || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+      link.classList.add('is-active');
+    }
+  });
+}
+skmdSetActiveNav();
+
 })();
 </script>
 </body>
