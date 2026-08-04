@@ -388,6 +388,45 @@ console.warn("Fetch failed for URL:", url, err);
 }
 return null;
 }
+
+// Helpers
+function skmdCatClass(cat) {
+    if (!cat) return 'cat-default';
+    const c = cat.toLowerCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (c.includes('dinh') || c.includes('duong')) return 'cat-dinh-duong';
+    if (c.includes('luyen') || c.includes('tap')) return 'cat-luyen-tap';
+    if (c.includes('tinh') || c.includes('than')) return 'cat-tinh-than';
+    if (c.includes('giac') || c.includes('ngu')) return 'cat-giac-ngu';
+    if (c.includes('detox')) return 'cat-detox';
+    return 'cat-default';
+}
+
+function skmdCatSlug(cat) { 
+    if(!cat)return 'tin-tuc'; 
+    const c=cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); 
+    if(c.includes('kienthuc') || c.includes('kien thuc'))return 'kien-thuc-can-biet'; 
+    if(c.includes('tri'))return 'tri'; 
+    if(c.includes('thai'))return 'dinh-chi-thai'; 
+    if(c.includes('quydau') || c.includes('quy dau'))return 'bao-quy-dau'; 
+    return 'tin-tuc'; 
+}
+
+function skmdCatName(cat) {
+    if (!cat) return 'Sức Khỏe';
+    if (cat === 'KienThuc') return 'Kiến thức cần biết';
+    if (cat === 'Tri') return 'Trĩ';
+    if (cat === 'DinhChiThai') return 'Đình chỉ thai';
+    if (cat === 'BaoQuyDau') return 'Bao quy đầu';
+    return cat;
+}
+
+function skmdInitials(name) {
+    if (!name) return '?';
+    const p = name.trim().split(' ');
+    if (p.length === 1) return p[0].charAt(0).toUpperCase();
+    return (p[0].charAt(0) + p[p.length - 1].charAt(0)).toUpperCase();
+}
+
 async function initArticle() {
         let post = null;
         if (window.__ARTICLE_DATA__) {
