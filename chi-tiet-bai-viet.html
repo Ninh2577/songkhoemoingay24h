@@ -71,17 +71,18 @@ viết đã bị xóa.</p>
 </div>
 <div id="skmd-content-wrapper" style="opacity:0; transition: opacity 0.5s">
 <section class="skmd-article-hero">
-<div class="skmd-c skmd-article-hero-inner">
+<div class="skmd-article-hero__inner">
 <div class="skmd-breadcrumb">
-<a href="/">Trang Chủ</a> <span>/</span>
-<a href="/blog">Chuyên Mục</a> <span>/</span>
-<span id="skmd-cat-crumb" style="color:var(--color-text-main); font-weight:700;">...</span>
+<a href="/">Trang Chủ</a> <i class="ri-arrow-right-s-line"></i>
+<a href="/blog">Chuyên Mục</a> <i class="ri-arrow-right-s-line"></i>
+<span id="skmd-cat-crumb" style="font-weight:600; color:var(--color-primary-dark);">...</span>
 </div>
+<div class="skmd-article-hero__badge" id="skmd-cat-badge">Nổi bật</div>
 <h1 class="skmd-article-hero__title" id="skmd-title">...</h1>
 <p class="skmd-article-hero__summary" id="skmd-summary">...</p>
 <div class="skmd-trust-row">
 <div class="skmd-trust-badge" title="Bài viết được duyệt bởi chuyên gia y tế">
-<i class="ri-verified-badge-fill"></i> Đã kiểm duyệt y khoa
+<i class="ri-verified-badge-fill"></i> Được kiểm duyệt y khoa
 </div>
 <div class="skmd-trust-meta">
 <i class="ri-history-line"></i> Cập nhật: <span id="skmd-date-updated">Hôm nay</span>
@@ -90,27 +91,30 @@ viết đã bị xóa.</p>
 <i class="ri-book-open-line"></i> Thời gian đọc: <span id="skmd-read-time">...</span>
 </div>
 <div class="skmd-trust-meta">
-<i class="ri-shield-check-line"></i> Nguồn tham khảo uy tín
+<i class="ri-file-list-3-line"></i> Có tài liệu tham khảo
+</div>
+<div class="skmd-trust-meta" style="color: #059669; font-weight: 600;">
+<i class="ri-heart-pulse-line"></i> Chuẩn YMYL
 </div>
 </div>
 <div class="skmd-article-authors">
 <div class="skmd-article-author">
-<div class="skmd-article-author-av" id="skmd-av1">...</div>
-<div class="skmd-article-author-info">
-<span class="skmd-article-author-role">Biên tập viên</span>
-<span class="skmd-article-author-name"><a href="#" id="skmd-author1">...</a></span>
+<div class="skmd-article-author__av" id="skmd-av1">...</div>
+<div class="skmd-article-author__info">
+<span class="skmd-article-author__role">Biên tập viên / Tác giả</span>
+<span class="skmd-article-author__name"><a href="#" id="skmd-author1">...</a></span>
 </div>
 </div>
-<div class="skmd-article-author">
-<div class="skmd-article-author-av" style="background:#e0e7ff; color:#4338ca;"><i
-class="ri-stethoscope-line"></i></div>
-<div class="skmd-article-author-info">
-<span class="skmd-article-author-role" style="color:#4338ca;">Tham vấn y khoa</span>
-<span class="skmd-article-author-name"><a href="#">Hội đồng Y khoa Sống Khỏe</a></span>
+<div class="skmd-article-author__divider"></div>
+<div class="skmd-article-author skmd-article-author--reviewer">
+<div class="skmd-article-author__av" style="background:#e0e7ff; color:#4338ca;"><i class="ri-stethoscope-line"></i></div>
+<div class="skmd-article-author__info">
+<span class="skmd-article-author__role" style="color:#4338ca;">Tham vấn y khoa & Fact Checked</span>
+<span class="skmd-article-author__name"><a href="#">Hội đồng Y khoa Sống Khỏe</a></span>
 </div>
 </div>
 </div>
-<div id="skmd-thumb" style="margin-top: 32px;"></div>
+<div id="skmd-thumb"></div>
 </div>
 </section>
 <div class="skmd-article-layout skmd-c">
@@ -140,6 +144,12 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 </div>
 <article class="skmd-article-content" id="skmd-html-content">
 </article>
+<div class="skmd-medical-disclaimer" style="margin-top: 40px; padding: 20px; background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 8px;">
+<div style="display: flex; gap: 12px; align-items: flex-start;">
+<i class="ri-information-fill" style="color: #ef4444; font-size: 1.5rem; margin-top: -2px;"></i>
+<p style="font-size: 0.95rem; color: #7f1d1d; line-height: 1.6; margin: 0;"><strong>Tuyên bố miễn trừ trách nhiệm y tế:</strong> Các bài viết trên Sống Khỏe Mỗi Ngày chỉ có tính chất tham khảo, không thay thế cho việc chẩn đoán hoặc điều trị y khoa. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa trước khi áp dụng bất kỳ phương pháp nào.</p>
+</div>
+</div>
 <div id="skmd-inline-cta" class="skmd-inline-cta" style="display:none;">
 <div class="skmd-inline-cta-text">
 <h4>Bản tin Sống Khỏe Premium</h4>
@@ -203,11 +213,11 @@ khỏe mạnh mỗi ngày.</p>
 <aside class="skmd-article-sidebar">
 <div class="skmd-sidebar-sticky">
 <div class="skmd-sidebar-box" id="desktop-toc-container" style="display:none;">
-<div class="skmd-skmd-sidebar-box__title"><i class="ri-list-indented"></i> Mục lục bài viết</div>
+<div class="skmd-sidebar-box__title"><i class="ri-list-indented"></i> Mục lục bài viết</div>
 <div class="skmd-toc-list" id="desktop-skmd-toc-list"></div>
 </div>
 <div class="skmd-sidebar-box">
-<div class="skmd-skmd-sidebar-box__title"><i class="ri-star-smile-fill"></i> Gợi ý cho bạn</div>
+<div class="skmd-sidebar-box__title"><i class="ri-star-smile-fill"></i> Gợi ý cho bạn</div>
 <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=400&auto=format&fit=crop"
 style="width:100%; border-radius:8px; margin-bottom:12px; object-fit:cover; aspect-ratio:4/3;"
 alt="Promo">
@@ -215,8 +225,7 @@ alt="Promo">
 <p
 style="font-size:0.85rem; color:var(--color-text-muted); margin-bottom:12px; line-height:1.5;">
 Kế hoạch ăn uống khoa học giúp thanh lọc cơ thể và giảm mỡ an toàn.</p>
-<a href="/blog" class="btn btn-outline" style="width:100%; padding:8px; font-size:0.85rem;">Xem
-Ngay</a>
+<a href="/blog" class="skmd-btn skmd-btn--outline" style="width:100%; padding:8px; font-size:0.85rem;">Xem Ngay</a>
 </div>
 </div>
 </aside>
@@ -322,7 +331,7 @@ anh { url }
 }
 }`;
 const RELATED_QUERY = `query GetRelated {
-baiViets(orderBy: createdAt_DESC, first: 3) {
+baiViets(orderBy: createdAt_DESC, first: 5) {
 title
 slug
 danhmuc
@@ -450,10 +459,11 @@ const posts = data?.baiViets || [];
 const relatedEl = document.getElementById('skmd-related');
 if (posts.length > 0) {
 let html = '';
-posts.forEach(p => {
+posts.forEach((p, idx) => {
 const img = p.anh?.url || 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop';
+const isFeatured = idx === 0;
 html += `
-<article class="skmd-card" style="cursor:pointer" onclick="window.location.href='/${p.slug}'">
+<article class="skmd-card ${isFeatured ? 'skmd-card--featured' : 'skmd-card--small'}" style="cursor:pointer" onclick="window.location.href='/${p.slug}'">
 <div class="skmd-card__img">
 <img src="${img}" alt="${p.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
 </div>
@@ -477,6 +487,8 @@ document.title = post.title + " - Sống Khỏe Mỗi Ngày";
 document.getElementById('skmd-title').textContent = post.title;
 document.getElementById('skmd-summary').textContent = post.tomtat || "Bài viết chia sẻ những kiến thức y khoa chuyên sâu giúp bạn chăm sóc sức khỏe tốt hơn mỗi ngày.";
 document.getElementById('skmd-cat-crumb').textContent = skmdCatName(post.danhmuc);
+document.getElementById('skmd-cat-badge').textContent = skmdCatName(post.danhmuc);
+document.getElementById('skmd-cat-badge').className = 'skmd-article-hero__badge ' + skmdCatClass(post.danhmuc);
 document.getElementById('skmd-date-updated').textContent = formatDate(post.createdAt);
 const authorName = post.tacGia || "Ban Biên Tập";
 
