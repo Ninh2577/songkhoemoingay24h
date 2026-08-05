@@ -40,8 +40,8 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
     html = html.replace('</head>', injectionBlock + '\n</head>');
 
     // Inject Content
-    const contentToInject = `<article class="art-content" id="skmd-html-content">${article.contentHtml}</article>`;
-    html = html.replace(/<article class="art-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);
+    const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${article.contentHtml}</article>`;
+    html = html.replace(/<article class="skmd-article-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);
 
     return html;
 }
