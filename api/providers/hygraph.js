@@ -52,6 +52,7 @@ async function getArticleBySlug(slug) {
                 danhmuc
                 anh { url }
                 tacGia
+                createdBy { name }
                 createdAt
                 updatedAt
                 noiDung { html }

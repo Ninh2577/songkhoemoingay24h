@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Chuyển hướng trang chủ
+RewriteRule ^$ home.html [L]
+
+# Chuyển hướng các chuyên mục về blog.html
+RewriteRule ^blog$ blog.html [L]
+RewriteRule ^kien-thuc-can-biet$ blog.html [L]
+RewriteRule ^tri$ blog.html [L]
+RewriteRule ^dinh-chi-thai$ blog.html [L]
+RewriteRule ^bao-quy-dau$ blog.html [L]
+
+# Bỏ qua các file và thư mục có thật (css, js, hình ảnh, api...)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Chuyển hướng các URL bài viết (slug) về chi-tiet-bai-viet.html để Javascript tự render (CSR)
+RewriteRule ^([^/.]+)$ chi-tiet-bai-viet.html [L]

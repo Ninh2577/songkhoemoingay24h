@@ -136,7 +136,7 @@ mỡ an toàn</a>
 <p class="section__desc">Cập nhật những thông tin sức khỏe chính xác, khoa học và dễ áp dụng hàng ngày.
 </p>
 </div>
-<div class="articles__grid" id="skmd-home-articles">
+<div class="articles__grid" id="skmd-home-articles" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 24px;">
 <div style="grid-column: 1 / -1; text-align: center; padding: 40px;" id="skmd-home-loading">
 <div
 style="width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: #16a34a; border-radius: 50%; animation: skmdSpin 1s infinite linear; margin: 0 auto 16px;">
@@ -144,8 +144,9 @@ style="width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: #
 <p style="color: #6b7280;">Đang tải bài viết mới nhất...</p>
 </div>
 </div>
+<div id="skmd-home-pagination" style="display:none; justify-content:center; align-items:center; gap: 16px; margin-bottom: 40px;"></div>
 <div class="articles__more">
-<a href="/blog" class="skmd-btn skmd-btn--outline" id="load-more-btn">Xem Tất Cả Bài Viết →</a>
+<a href="/blog" class="skmd-btn skmd-btn--primary" id="load-more-btn" style="background:var(--color-primary-light); color:var(--color-primary-dark); border:none;">Xem Tất Cả Bài Viết Trên Blog →</a>
 </div>
 </div>
 </section>
@@ -291,9 +292,9 @@ style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" alt="T
 <h4 class="skmd-footer__heading">Về Chúng Tôi</h4>
 <nav class="skmd-footer__nav">
 <a href="#"><i class="ri-arrow-right-s-line"></i> Giới Thiệu</a>
-<a href="#"><i class="ri-arrow-right-s-line"></i> Đội Ngũ Bác Sĩ</a>
+<a href="#"><i class="ri-arrow-right-s-line"></i> Điều Khoản Sử Dụng</a>
 <a href="#"><i class="ri-arrow-right-s-line"></i> Chính Sách Bảo Mật</a>
-<a href="#"><i class="ri-arrow-right-s-line"></i> Liên Hệ</a>
+<a href="#"><i class="ri-arrow-right-s-line"></i> Miễn Trừ Trách Nhiệm</a>
 </nav>
 </div>
 
@@ -318,6 +319,7 @@ title
 slug
 tomtat
 tacGia
+createdBy { name }
 danhmuc
 noBat
 anh { url }
@@ -354,56 +356,74 @@ if (c.includes('thai')) return 'skmd-tag--purple';
 if (c.includes('quy dau')) return 'skmd-tag--green';
 return 'skmd-tag--gray';
 }
-function renderHomeArticles(posts) {
+let allHomePosts = [];
+let currentHomePg = 1;
+const postsPerPage = 3;
+
+function renderHomeArticles() {
 const gridEl = document.getElementById('skmd-home-articles');
+const paginationEl = document.getElementById('skmd-home-pagination');
 if (!gridEl) return;
-if (!posts || posts.length === 0) {
-gridEl.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Chưa có bài viết nào.</p>';
+if (allHomePosts.length === 0) {
+gridEl.innerHTML = '<p style="grid-column: 1/-1; text-align: center; font-size:1.1rem; color:#6b7280;">Chưa có bài viết nào.</p>';
+if(paginationEl) paginationEl.style.display = 'none';
 return;
 }
-const displayPosts = posts.slice(0, 5);
+const startIndex = (currentHomePg - 1) * postsPerPage;
+const displayPosts = allHomePosts.slice(startIndex, startIndex + postsPerPage);
 let html = '';
-displayPosts.forEach((post, i) => {
-const isLarge = i === 0;
+displayPosts.forEach((post) => {
 const imgBg = post.anh && post.anh.url
-? `<img src="${post.anh.url}" alt="${post.title}" loading="lazy" />`
-: `<span style="font-size:${isLarge ? '5rem' : '3rem'}">${skmdEmoji(post.danhmuc)}</span>`;
-const cardHtml = `
-<article class="skmd-card ${isLarge ? 'skmd-card--large' : ''}" style="cursor:pointer" onclick="window.location.href='/${post.slug}'">
-<div class="skmd-card__img">
+? `<img src="${post.anh.url}" alt="${post.title}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>`
+: `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f3f4f6; font-size:4rem; color:#9ca3af;">${skmdEmoji(post.danhmuc)}</div>`;
+const authorName = post.createdBy?.name || post.tacGia || 'Ban Biên Tập';
+html += `
+<article class="skmd-card" style="cursor:pointer; display:flex; flex-direction:column; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.04)';" onclick="window.location.href='/${post.slug}'">
+<div class="skmd-card__img" style="height:220px; overflow:hidden;">
 ${imgBg}
 </div>
-<div class="skmd-card__body">
-<div class="skmd-card__meta-top">
+<div class="skmd-card__body" style="padding: 24px; flex:1; display:flex; flex-direction:column;">
+<div class="skmd-card__meta-top" style="margin-bottom:12px;">
 <span class="skmd-tag ${skmdCatClass(post.danhmuc)}">${skmdCatName(post.danhmuc)}</span>
-<span class="skmd-tag skmd-tag--gray"><i class="ri-time-line"></i> 5 phút đọc</span>
 </div>
-<h3 class="skmd-card__title">${post.title}</h3>
-<p class="skmd-card__desc">${post.tomtat || 'Khám phá kiến thức sức khỏe...'}</p>
-<div class="skmd-card__footer">
-<div class="skmd-author">
-<div class="skmd-author__avatar">${skmdInitials(post.tacGia)}</div>
-<span class="skmd-author__name">${post.tacGia || 'Ban Biên Tập'}</span>
+<h3 class="skmd-card__title" style="font-size:1.3rem; line-height:1.4; margin-bottom:12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${post.title}</h3>
+<p class="skmd-card__desc" style="flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; font-size:0.95rem; color:#4b5563; line-height:1.6; margin-bottom:20px;">${post.tomtat || 'Khám phá kiến thức sức khỏe...'}</p>
+<div class="skmd-card__footer" style="padding-top:16px; border-top:1px solid #f3f4f6; display:flex; align-items:center; justify-content:space-between;">
+<div class="skmd-author" style="display:flex; align-items:center; gap:8px;">
+<div class="skmd-author__avatar" style="width:32px; height:32px; font-size:0.75rem;">${skmdInitials(authorName)}</div>
+<span class="skmd-author__name" style="font-size:0.85rem; font-weight:600;">${authorName}</span>
 </div>
-<span><i class="ri-fire-fill" style="color:#ef4444"></i> Hôm nay</span>
+<span style="font-size:0.8rem; color:#6b7280; display:flex; align-items:center; gap:4px;"><i class="ri-checkbox-circle-fill" style="color:#10b981;"></i> Đã duyệt</span>
 </div>
 </div>
 </article>
 `;
-if (i === 0) {
-html += cardHtml;
-if (displayPosts.length > 1) {
-html += `<div class="skmd-grid-2">`;
-}
-} else {
-html += cardHtml;
-if (i === displayPosts.length - 1) {
-html += `</div>`;
-}
-}
 });
 gridEl.innerHTML = html;
+if (paginationEl) {
+const totalPages = Math.ceil(allHomePosts.length / postsPerPage);
+if (totalPages > 1) {
+paginationEl.style.display = 'flex';
+paginationEl.innerHTML = `
+<button onclick="window.changeHomePg(-1)" class="skmd-btn skmd-btn--outline" style="min-width:100px; ${currentHomePg === 1 ? 'opacity:0.5; pointer-events:none;' : ''}"><i class="ri-arrow-left-s-line"></i> Trước</button>
+<span style="font-weight:700; color:var(--color-text-main); font-size:0.95rem;">Trang ${currentHomePg} / ${totalPages}</span>
+<button onclick="window.changeHomePg(1)" class="skmd-btn skmd-btn--outline" style="min-width:100px; ${currentHomePg === totalPages ? 'opacity:0.5; pointer-events:none;' : ''}">Tiếp <i class="ri-arrow-right-s-line"></i></button>
+`;
+} else {
+paginationEl.style.display = 'none';
 }
+}
+}
+
+window.changeHomePg = function(dir) {
+const totalPages = Math.ceil(allHomePosts.length / postsPerPage);
+const newPg = currentHomePg + dir;
+if (newPg >= 1 && newPg <= totalPages) {
+currentHomePg = newPg;
+renderHomeArticles();
+document.getElementById('skmd-articles').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+};
 async function fetchHomeArticles() {
 const loadEl = document.getElementById('skmd-home-loading');
 for (const url of HYGRAPH_URLS) {
@@ -425,12 +445,12 @@ if (!res.ok) throw new Error('HTTP ' + res.status);
 }
 if (json && json.errors) throw new Error(json.errors[0].message);
 if (!res.ok) throw new Error('HTTP ' + res.status);
-const posts = json.data?.baiViets || [];
+allHomePosts = json.data?.baiViets || [];
 if (loadEl) {
 loadEl.style.display = 'none';
 loadEl.remove();
 }
-renderHomeArticles(posts);
+renderHomeArticles();
 return;
 } catch (err) {
 console.warn("Lỗi fetch:", url, err);
