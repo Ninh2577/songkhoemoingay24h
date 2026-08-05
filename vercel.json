@@ -12,8 +12,7 @@
     { "source": "/dinh-chi-thai", "destination": "/blog.html" },
     { "source": "/bao-quy-dau", "destination": "/blog.html" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/:id(cm[a-zA-Z0-9]+)/:filename*", "destination": "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/:id" },
-    { "source": "/:id(cm[a-zA-Z0-9]+)", "destination": "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/:id" },
+    { "source": "/:id(cm[a-zA-Z0-9]+)(?:/.*)?", "destination": "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/:id" },
     { "source": "/:slug([^.]+)", "destination": "/api/render-article" }
   ]
 }
