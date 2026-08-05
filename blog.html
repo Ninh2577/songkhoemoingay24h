@@ -71,14 +71,11 @@ rel="stylesheet" />
 <span style="color:#111827">Blog Sức Khỏe</span>
 </div>
 <div class="filters" id="skmd-filters">
-<button class="filter-btn active" onclick="skmdFilter('all')">Tất Cả</button>
-<button class="filter-btn" onclick="skmdFilter('KienThuc')"><i class="ri-book-open-fill"></i> Kiến thức cần
-biết</button>
-<button class="filter-btn" onclick="skmdFilter('Tri')"><i class="ri-hospital-fill"></i> Trĩ</button>
-<button class="filter-btn" onclick="skmdFilter('DinhChiThai')"><i class="ri-parent-fill"></i> Đình chỉ
-thai</button>
-<button class="filter-btn" onclick="skmdFilter('BaoQuyDau')"><i class="ri-men-fill"></i> Bao quy
-đầu</button>
+<a href="/blog" class="filter-btn">Tất Cả</a>
+<a href="/kien-thuc-can-biet" class="filter-btn"><i class="ri-book-open-fill"></i> Kiến thức cần biết</a>
+<a href="/tri" class="filter-btn"><i class="ri-hospital-fill"></i> Trĩ</a>
+<a href="/dinh-chi-thai" class="filter-btn"><i class="ri-parent-fill"></i> Đình chỉ thai</a>
+<a href="/bao-quy-dau" class="filter-btn"><i class="ri-men-fill"></i> Bao quy đầu</a>
 </div>
 <div class="blog-layout">
 <div id="skmd-articles">
@@ -98,10 +95,10 @@ thai</button>
 <div class="sidebar-card">
 <div class="sidebar-title"><i class="ri-price-tag-3-fill"></i> Chủ Đề</div>
 <div class="tag-cloud">
-<span class="tag-pill" onclick="skmdFilter('KienThuc')">Kiến thức cần biết</span>
-<span class="tag-pill" onclick="skmdFilter('Tri')">Trĩ</span>
-<span class="tag-pill" onclick="skmdFilter('DinhChiThai')">Đình chỉ thai</span>
-<span class="tag-pill" onclick="skmdFilter('BaoQuyDau')">Bao quy đầu</span>
+<a href="/kien-thuc-can-biet" class="tag-pill" style="text-decoration:none;">Kiến thức cần biết</a>
+<a href="/tri" class="tag-pill" style="text-decoration:none;">Trĩ</a>
+<a href="/dinh-chi-thai" class="tag-pill" style="text-decoration:none;">Đình chỉ thai</a>
+<a href="/bao-quy-dau" class="tag-pill" style="text-decoration:none;">Bao quy đầu</a>
 </div>
 </div>
 <div class="sidebar-card"
@@ -328,10 +325,14 @@ skmdGenerateBlogSchema(posts);
 function skmdFilter(cat) {
 skmdCurrentFilter = cat;
 document.querySelectorAll('.filter-btn, .tag-pill').forEach(btn => {
-btn.classList.toggle('active',
-(cat === 'all' && btn.textContent.trim() === 'Tất Cả') ||
-(btn.getAttribute('onclick') || '').includes(cat)
-);
+const href = btn.getAttribute('href') || '';
+let isActive = false;
+if (cat === 'all' && href.endsWith('/blog')) isActive = true;
+if (cat === 'KienThuc' && href.includes('kien-thuc')) isActive = true;
+if (cat === 'Tri' && href.endsWith('/tri')) isActive = true;
+if (cat === 'DinhChiThai' && href.includes('thai')) isActive = true;
+if (cat === 'BaoQuyDau' && href.includes('quy-dau')) isActive = true;
+btn.classList.toggle('active', isActive);
 });
 if (cat === 'all') {
 skmdRenderPosts(skmdAllPosts);
