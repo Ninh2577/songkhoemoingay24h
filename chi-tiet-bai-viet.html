@@ -70,44 +70,7 @@ viết đã bị xóa.</p>
 </nav>
 </div>
 <div id="skmd-content-wrapper" style="opacity:0; transition: opacity 0.5s">
-<section class="skmd-article-hero">
-<div class="skmd-article-hero__inner">
-<div class="skmd-breadcrumb" style="justify-content: center; margin-bottom: 12px; gap: 8px;">
-<a href="/">Trang Chủ</a> <span>&bull;</span>
-<a href="/blog">Chuyên Mục</a> <span>&bull;</span>
-<span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700;">Nổi bật</span>
-</div>
-<h1 class="skmd-article-hero__title" id="skmd-title">...</h1>
-<p class="skmd-article-hero__summary" id="skmd-summary">...</p>
-<div class="skmd-trust-row" style="background:transparent; border:none; box-shadow:none; padding:0; margin-bottom:20px; gap: 12px;">
-<span class="skmd-trust-meta"><i class="ri-book-open-line"></i> <span id="skmd-read-time">...</span></span>
-<span style="color:var(--color-border);">&bull;</span>
-<span class="skmd-trust-meta"><i class="ri-history-line"></i> <span id="skmd-date-updated">Hôm nay</span></span>
-<span style="color:var(--color-border);">&bull;</span>
-<span class="skmd-trust-meta"><i class="ri-file-list-3-line"></i> Nguồn uy tín</span>
-<span style="color:var(--color-border);">&bull;</span>
-<span class="skmd-trust-badge" title="Bài viết được duyệt bởi chuyên gia y tế"><i class="ri-verified-badge-fill"></i> Được kiểm duyệt</span>
-</div>
-<div class="skmd-article-authors" style="border:none; padding:0; margin-bottom:24px; gap: 20px;">
-<div class="skmd-article-author">
-<div class="skmd-article-author__av" id="skmd-av1" style="width:40px; height:40px;">...</div>
-<div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:6px;">
-<span class="skmd-article-author__name"><a href="#" id="skmd-author1">...</a></span>
-<span class="skmd-article-author__role" style="font-size:0.85rem; font-weight:400; text-transform:none;">(Biên tập viên)</span>
-</div>
-</div>
-<div class="skmd-article-author__divider" style="height:24px;"></div>
-<div class="skmd-article-author skmd-article-author--reviewer">
-<div class="skmd-article-author__av" style="width:40px; height:40px; background:#e0e7ff; color:#4338ca;"><i class="ri-stethoscope-line"></i></div>
-<div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:6px;">
-<span class="skmd-article-author__role" style="color:#4338ca; font-size:0.85rem; font-weight:400; text-transform:none;">Tham vấn:</span>
-<span class="skmd-article-author__name"><a href="#">Hội đồng Y khoa Sống Khỏe</a></span>
-</div>
-</div>
-</div>
-<div id="skmd-thumb"></div>
-</div>
-</section>
+<!-- Moved Hero Section to inside skmd-article-main -->
 <div class="skmd-article-layout skmd-c">
 <aside class="skmd-article-social">
 <span
@@ -126,6 +89,42 @@ title="LinkedIn"><i class="ri-linkedin-fill"></i></button>
 title="Copy Link"><i class="ri-links-fill"></i></button>
 </aside>
 <main class="skmd-article-main">
+<header class="skmd-article-hero" style="padding: 0 0 24px 0; background: transparent; border: none; text-align: left; align-items: flex-start;">
+<div class="skmd-breadcrumb" style="justify-content: flex-start; margin-bottom: 16px; gap: 8px;">
+<a href="/">Trang Chủ</a> <span>&bull;</span>
+<a href="/blog">Chuyên Mục</a> <span>&bull;</span>
+<span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700;">Nổi bật</span>
+</div>
+<h1 class="skmd-article-hero__title" id="skmd-title" style="text-align: left; max-width: 100%;">...</h1>
+<p class="skmd-article-hero__summary" id="skmd-summary" style="text-align: left; max-width: 100%;">...</p>
+<div class="skmd-trust-row" style="background:transparent; border:none; box-shadow:none; padding:0; margin-bottom:24px; gap: 12px; justify-content: flex-start;">
+<span class="skmd-trust-meta"><i class="ri-book-open-line"></i> <span id="skmd-read-time">...</span></span>
+<span style="color:var(--color-border);">&bull;</span>
+<span class="skmd-trust-meta"><i class="ri-history-line"></i> <span id="skmd-date-updated">Hôm nay</span></span>
+<span style="color:var(--color-border);">&bull;</span>
+<span class="skmd-trust-meta"><i class="ri-file-list-3-line"></i> Nguồn uy tín</span>
+<span style="color:var(--color-border);">&bull;</span>
+<span class="skmd-trust-badge" title="Bài viết được duyệt bởi chuyên gia y tế"><i class="ri-verified-badge-fill"></i> Được kiểm duyệt</span>
+</div>
+<div class="skmd-article-authors" style="border:none; padding:0; margin-bottom:24px; gap: 20px; justify-content: flex-start;">
+<div class="skmd-article-author">
+<div class="skmd-article-author__av" id="skmd-av1" style="width:40px; height:40px;">...</div>
+<div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:6px;">
+<span class="skmd-article-author__name"><a href="#" id="skmd-author1">...</a></span>
+<span class="skmd-article-author__role" style="font-size:0.85rem; font-weight:400; text-transform:none;">(Biên tập viên)</span>
+</div>
+</div>
+<div class="skmd-article-author__divider" style="height:24px;"></div>
+<div class="skmd-article-author skmd-article-author--reviewer">
+<div class="skmd-article-author__av" style="width:40px; height:40px; background:#e0e7ff; color:#4338ca;"><i class="ri-stethoscope-line"></i></div>
+<div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:6px;">
+<span class="skmd-article-author__role" style="color:#4338ca; font-size:0.85rem; font-weight:400; text-transform:none;">Tham vấn:</span>
+<span class="skmd-article-author__name"><a href="#">Hội đồng Y khoa Sống Khỏe</a></span>
+</div>
+</div>
+</div>
+<div id="skmd-thumb"></div>
+</header>
 <div class="skmd-mobile-toc" id="mobile-toc-container">
 <div class="skmd-mobile-toc-hdr" onclick="this.parentElement.classList.toggle('open')">
 <span><i class="ri-list-unordered"></i> Mục lục bài viết</span>
