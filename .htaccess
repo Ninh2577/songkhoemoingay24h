@@ -13,5 +13,8 @@ RewriteRule ^bao-quy-dau$ blog.html [L]
 # Bỏ qua các file và thư mục có thật (css, js, hình ảnh, api...)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Proxy hình ảnh cho localhost (XAMPP)
+RewriteRule ^(cm[a-zA-Z0-9]+)(/.*)?$ image.php?id=$1 [L,NC]
 # Chuyển hướng các URL bài viết (slug) về chi-tiet-bai-viet.html để Javascript tự render (CSR)
 RewriteRule ^([^/.]+)$ chi-tiet-bai-viet.html [L]

@@ -55,7 +55,12 @@ async function getArticleBySlug(slug) {
                 createdBy { name }
                 createdAt
                 updatedAt
-                noiDung { html }
+                noiDung { 
+                    html 
+                    references { 
+                        ... on Asset { id fileName url } 
+                    } 
+                }
             }
         }
     `;

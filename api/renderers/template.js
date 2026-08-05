@@ -39,8 +39,26 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
     // Inject inside <head>
     html = html.replace('</head>', injectionBlock + '\n</head>');
 
-    // Inject Content
-    const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${article.contentHtml}</article>`;
+    // Build Asset Map from GraphQL references to get exact original file names
+    const assetMap = {};
+    if (article.raw?.noiDung?.references) {
+        article.raw.noiDung.references.forEach(ref => {
+            if (ref.id && ref.fileName) {
+                assetMap[ref.id] = ref.fileName;
+            }
+        });
+    }
+
+    // Rewrite image URLs to use /ID/fileName
+    let finalHtml = article.contentHtml || '';
+    finalHtml = finalHtml.replace(/<img([^>]*)src="https:\/\/[a-z0-9\-]+\.graphassets\.com\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)"([^>]*)>/gi, (match, p1, envId, assetId, p2) => {
+        const titleMatch = match.match(/title="([^"]+)"/i);
+        const altMatch = match.match(/alt="([^"]+)"/i);
+        const filename = assetMap[assetId] || (titleMatch && titleMatch[1]) || (altMatch && altMatch[1]) || 'image.png';
+        const cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
+        return `<img${p1}src="/${assetId}/${cleanName}"${p2}>`;
+    });
+    const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;
     html = html.replace(/<article class="skmd-article-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);
 
     return html;

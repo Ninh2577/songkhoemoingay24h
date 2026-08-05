@@ -140,13 +140,7 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 <p style="font-size: 0.95rem; color: #7f1d1d; line-height: 1.6; margin: 0;"><strong>Tuyên bố miễn trừ trách nhiệm y tế:</strong> Các bài viết trên Sống Khỏe Mỗi Ngày chỉ có tính chất tham khảo, không thay thế cho việc chẩn đoán hoặc điều trị y khoa. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa trước khi áp dụng bất kỳ phương pháp nào.</p>
 </div>
 </div>
-<div id="skmd-inline-cta" class="skmd-inline-cta" style="display:none;">
-<div class="skmd-inline-cta-text">
-<h4>Bản tin Sống Khỏe Premium</h4>
-<p>Nhận các bí quyết dinh dưỡng và bài tập độc quyền trực tiếp qua email mỗi tuần.</p>
-</div>
-<a href="#footer-newsletter" class="skmd-btn skmd-btn--primary">Đăng Ký Miễn Phí</a>
-</div>
+
 <div class="skmd-article-footer">
 <div class="skmd-article-tags" id="skmd-tags"></div>
 <div class="skmd-policy-box" style="margin-top: 32px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
@@ -383,6 +377,26 @@ function skmdCatName(cat) {
     return cat;
 }
 
+function skmdGetBasePath() {
+    let base = '/';
+    if (typeof window !== 'undefined' && window.location.pathname.includes('/songkhoemoingay/')) {
+        base = window.location.pathname.substring(0, window.location.pathname.indexOf('/songkhoemoingay/') + 17);
+    }
+    return base;
+}
+
+function skmdRewriteUrl(url, filename) {
+    if (!url) return url;
+    const base = skmdGetBasePath();
+    const match = url.match(/https:\/\/[a-z0-9\-]+\.graphassets\.com\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)/i);
+    if (match && match[1]) {
+        const id = match[1];
+        const cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
+        return cleanName ? `${base}${id}/${cleanName}` : `${base}${id}`;
+    }
+    return url;
+}
+
 function skmdInitials(name) {
     if (!name) return '?';
     const p = name.trim().split(' ');
@@ -414,7 +428,7 @@ const relatedEl = document.getElementById('sidebar-related-list');
 if (posts.length > 0) {
 let html = '';
 posts.slice(0, 4).forEach((p) => {
-const img = p.anh?.url || 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop';
+const img = skmdRewriteUrl(p.anh?.url) || 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop';
 html += `
 <a href="/${p.slug}" class="skmd-sidebar-related-item" style="display:flex; gap:12px; text-decoration:none; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
 <div style="flex-shrink:0; width:80px; height:60px; border-radius:6px; overflow:hidden; position:relative; border: 1px solid var(--color-border);">
@@ -462,7 +476,8 @@ document.getElementById('skmd-author2').textContent = authorName;
 document.getElementById('skmd-av2').textContent = initials;
 const thumbEl = document.getElementById('skmd-thumb');
 if (post.anh && post.anh.url) {
-thumbEl.innerHTML = `<img src="${post.anh.url}" class="skmd-article-hero__img" alt="${post.title}" /><div class="skmd-article-hero__caption">Ảnh minh họa chuẩn y khoa</div>`;
+const proxiedImg = skmdRewriteUrl(post.anh.url, post.anh.fileName || (post.slug + '.jpg'));
+thumbEl.innerHTML = `<img src="${proxiedImg}" class="skmd-article-hero__img" alt="${post.title}" /><div class="skmd-article-hero__caption">Ảnh minh họa chuẩn y khoa</div>`;
 }
 if (post.danhmuc) {
 document.getElementById('skmd-tags').innerHTML = `<a href="/blog" class="skmd-tag ${skmdCatClass(post.danhmuc)}">${skmdCatName(post.danhmuc)}</a> <a href="/blog" class="skmd-tag skmd-tag--gray">Sức khỏe</a>`;
@@ -471,6 +486,24 @@ const contentEl = document.getElementById('skmd-html-content');
         if (!window.__ARTICLE_DATA__) {
             contentEl.innerHTML = post.noiDung?.html || "<p>Nội dung đang được cập nhật...</p>";
         }
+        const assetMap = {};
+        if (post.noiDung && post.noiDung.references) {
+            post.noiDung.references.forEach(ref => {
+                if (ref.id && ref.fileName) {
+                    assetMap[ref.id] = ref.fileName;
+                }
+            });
+        }
+        
+        // Process images inside content
+        contentEl.querySelectorAll('img').forEach(img => {
+            const match = img.src.match(/https:\/\/[a-z0-9\-]+\.graphassets\.com\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)/i);
+            if (match && match[1]) {
+                const id = match[1];
+                let filename = assetMap[id] || img.getAttribute('title') || img.getAttribute('alt') || 'image.png';
+                img.src = skmdRewriteUrl(img.src, filename);
+            }
+        });
 document.getElementById('skmd-read-time').textContent = calculateReadTime(post.noiDung?.html) + " phút";
 enhanceHTML(contentEl);
 document.getElementById('skmd-loading').style.display = 'none';
@@ -519,13 +552,6 @@ dToc.innerHTML = tocHTML;
 mToc.innerHTML = tocHTML;
 document.getElementById('desktop-toc-container').style.display = 'block';
 initScrollSpy();
-}
-const paragraphs = container.querySelectorAll('p');
-if (paragraphs.length > 4) {
-const middleIndex = Math.floor(paragraphs.length / 2);
-const cta = document.getElementById('skmd-inline-cta');
-cta.style.display = 'flex';
-paragraphs[middleIndex].parentNode.insertBefore(cta, paragraphs[middleIndex].nextSibling);
 }
 }
 function initScrollSpy() {
@@ -599,6 +625,7 @@ img.style.display = 'block';
 }
 setTimeout(injectLogo, 50);
 function skmdInjectSchemaGraph(schemaObj, schemaId) {
+document.querySelectorAll('.skmd-schema-graph').forEach(el => el.remove());
 const existing = document.getElementById(schemaId);
 if (existing) existing.remove();
 const script = document.createElement('script');
