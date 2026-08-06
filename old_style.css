@@ -1202,7 +1202,9 @@ body.menu-open {
   font-size: 1.125rem;
   color: #1f2937;
   line-height: 1.8;
-
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .skmd .skmd-article-content h2 {

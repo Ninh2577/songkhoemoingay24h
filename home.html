@@ -469,13 +469,13 @@ paginationEl.style.display = 'none';
 }
 
 window.changeHomePg = function(dir) {
-const totalPages = Math.ceil(allHomePosts.length / postsPerPage);
-const newPg = currentHomePg + dir;
-if (newPg >= 1 && newPg <= totalPages) {
-currentHomePg = newPg;
-renderHomeArticles();
-document.getElementById('skmd-articles').scrollIntoView({behavior: 'smooth', block: 'start'});
-}
+    const totalPages = Math.ceil(allHomePosts.length / postsPerPage);
+    const newPg = currentHomePg + dir;
+    if (newPg >= 1 && newPg <= totalPages) {
+        currentHomePg = newPg;
+        renderHomeArticles();
+        // Không scroll để giữ nút phân trang ở vị trí cũ, giúp bấm liên tiếp dễ dàng hơn
+    }
 };
 async function fetchHomeArticles() {
 const loadEl = document.getElementById('skmd-home-loading');
