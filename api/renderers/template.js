@@ -45,7 +45,8 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
         const titleMatch = match.match(/title="([^"]+)"/i);
         const altMatch = match.match(/alt="([^"]+)"/i);
         const filename = (titleMatch && titleMatch[1]) || (altMatch && altMatch[1]) || 'image.png';
-        const cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
+        let cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
+        if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
         return `<img${p1}src="/asset-proxy/${region}/${envId}/${assetId}/${cleanName}"${p2}>`;
     });
     const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;

@@ -363,7 +363,8 @@ function skmdRewriteUrl(url, filename) {
             const parsed = new URL(url);
             const host = parsed.hostname;
             const pathSegments = parsed.pathname.split('/').filter(Boolean);
-            const cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
+            let cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
+            if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
             const pathString = pathSegments.join('/');
             if (cleanName) {
                 return `${base}asset-proxy/${host}/${pathString}/${cleanName}`;
