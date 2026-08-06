@@ -85,6 +85,7 @@ rel="stylesheet" />
 </div>
 <div id="skmd-featured"></div>
 <div class="skmd-grid-3" id="skmd-grid"></div>
+<div id="skmd-pagination" style="display:none; justify-content:center; align-items:center; gap: 16px; margin-top: 40px; margin-bottom: 20px;"></div>
 <div id="skmd-empty" style="display:none" class="empty-state">
 <div class="icon"><i class="ri-mail-forbid-fill"></i></div>
 <h3>Chưa có bài viết</h3>
@@ -180,7 +181,7 @@ class="ri-leaf-fill"></i> Đăng Ký Miễn Phí</button>
 const HYGRAPH_URLS = [
 'https://ap-south-1.cdn.hygraph.com/content/cmrezpq25018t07walir17znu/master'
 ];
-const QUERY_SIMPLE = `{ baiViets(first: 100) { id title } }`;
+const QUERY_SIMPLE = `{ baiViets(first: 500) { id title } }`;
 const QUERY = `{
 baiViets(first: 100, orderBy: createdAt_DESC) {
 id
@@ -360,14 +361,22 @@ ${imgBg}
 }
 let skmdAllPosts = [];
 let skmdCurrentFilter = 'all';
-function skmdRenderPosts(posts) {
+let skmdCurrentPage = 1;
+const skmdPostsPerPage = 10;
+let skmdCurrentPosts = [];
+
+function skmdRenderPosts(posts, page = 1) {
+skmdCurrentPosts = posts;
+skmdCurrentPage = page;
 const featuredEl = document.getElementById('skmd-featured');
 const gridEl = document.getElementById('skmd-grid');
 const emptyEl = document.getElementById('skmd-empty');
+const paginationEl = document.getElementById('skmd-pagination');
 if (!posts || posts.length === 0) {
 featuredEl.innerHTML = '';
 gridEl.innerHTML = '';
 emptyEl.style.display = 'block';
+if (paginationEl) paginationEl.style.display = 'none';
 return;
 }
 const loadEl = document.getElementById('skmd-loading');
@@ -376,12 +385,49 @@ loadEl.style.display = 'none';
 loadEl.remove();
 }
 emptyEl.style.display = 'none';
+
 const featured = posts.find(p => p.noBat) || posts[0];
 const rest = posts.filter(p => p.id !== featured.id);
+
+const startIndex = (skmdCurrentPage - 1) * skmdPostsPerPage;
+const displayPosts = rest.slice(startIndex, startIndex + skmdPostsPerPage);
+
+if (skmdCurrentPage === 1) {
+featuredEl.style.display = 'block';
 featuredEl.innerHTML = skmdRenderFeatured(featured, 0);
-gridEl.innerHTML = rest.map((p, i) => skmdRenderCard(p, i + 1)).join('');
-skmdGenerateBlogSchema(posts);
+} else {
+featuredEl.style.display = 'none';
+featuredEl.innerHTML = '';
 }
+
+gridEl.innerHTML = displayPosts.map((p, i) => skmdRenderCard(p, startIndex + i + 1)).join('');
+
+if (paginationEl) {
+const totalPages = Math.ceil(rest.length / skmdPostsPerPage);
+if (totalPages > 1) {
+paginationEl.style.display = 'flex';
+paginationEl.innerHTML = `
+<button onclick="window.skmdChangePage(-1)" class="skmd-btn skmd-btn--outline" style="min-width:100px; ${skmdCurrentPage === 1 ? 'opacity:0.5; pointer-events:none;' : ''}"><i class="ri-arrow-left-s-line"></i> Trước</button>
+<span style="font-weight:700; color:var(--color-text-main); font-size:0.95rem;">Trang ${skmdCurrentPage} / ${totalPages}</span>
+<button onclick="window.skmdChangePage(1)" class="skmd-btn skmd-btn--outline" style="min-width:100px; ${skmdCurrentPage === totalPages ? 'opacity:0.5; pointer-events:none;' : ''}">Tiếp <i class="ri-arrow-right-s-line"></i></button>
+`;
+} else {
+paginationEl.style.display = 'none';
+}
+}
+skmdGenerateBlogSchema(displayPosts);
+}
+
+window.skmdChangePage = function(dir) {
+const featured = skmdCurrentPosts.find(p => p.noBat) || skmdCurrentPosts[0];
+const rest = skmdCurrentPosts.filter(p => p.id !== featured.id);
+const totalPages = Math.ceil(rest.length / skmdPostsPerPage);
+const newPg = skmdCurrentPage + dir;
+if (newPg >= 1 && newPg <= totalPages) {
+skmdRenderPosts(skmdCurrentPosts, newPg);
+document.getElementById('skmd-articles').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+};
 function skmdFilter(cat) {
 skmdCurrentFilter = cat;
 document.querySelectorAll('.filter-btn, .tag-pill').forEach(btn => {
@@ -395,14 +441,14 @@ if (cat === 'BaoQuyDau' && href.includes('quy-dau')) isActive = true;
 btn.classList.toggle('active', isActive);
 });
 if (cat === 'all') {
-skmdRenderPosts(skmdAllPosts);
+skmdRenderPosts(skmdAllPosts, 1);
 } else {
 const filtered = skmdAllPosts.filter(p => {
 const c = (p.danhmuc || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 const f = cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 return c.includes(f.split(' ')[0]);
 });
-skmdRenderPosts(filtered);
+skmdRenderPosts(filtered, 1);
 }
 }
 async function skmdFetchOne(url, query) {
@@ -451,7 +497,7 @@ skmdFilter('DinhChiThai');
 } else if (path.includes('bao-quy-dau')) {
 skmdFilter('BaoQuyDau');
 } else {
-skmdRenderPosts(skmdAllPosts);
+skmdRenderPosts(skmdAllPosts, 1);
 }
 return;
 }
