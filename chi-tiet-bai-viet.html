@@ -406,15 +406,14 @@ function skmdSlugify(str) {
 
 function skmdRewriteUrl(url, filename) {
     if (!url) return url;
-    if (url.includes('asset-proxy')) return url;
+    if (url.includes('asset-proxy') || url.includes('/image/')) return url;
     const base = skmdGetBasePath();
     if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
         try {
             const parsed = new URL(url);
-            const host = parsed.hostname;
             const pathSegments = parsed.pathname.split('/').filter(Boolean);
+            const assetId = pathSegments[pathSegments.length - 1];
             
-            // Remove the extension from filename if it exists to slugify the base name
             let ext = '';
             let baseName = filename || '';
             const lastDot = baseName.lastIndexOf('.');
@@ -427,10 +426,9 @@ function skmdRewriteUrl(url, filename) {
             if (cleanName) {
                 if (!ext) ext = '.jpg';
                 cleanName += ext;
-                // Return SEO friendly root URL
-                return `${base}${cleanName}`;
+                return `${base}image/${assetId}/${cleanName}`;
             } else {
-                return url; // Fallback if no filename is available
+                return `${base}image/${assetId}/image.jpg`;
             }
         } catch (e) {
             return url;

@@ -369,13 +369,13 @@ function skmdSlugify(str) {
 
 function skmdRewriteUrl(url, filename) {
     if (!url) return url;
-    if (url.includes('asset-proxy')) return url;
+    if (url.includes('asset-proxy') || url.includes('/image/')) return url;
     const base = skmdGetBasePath();
     if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
         try {
             const parsed = new URL(url);
-            const host = parsed.hostname;
             const pathSegments = parsed.pathname.split('/').filter(Boolean);
+            const assetId = pathSegments[pathSegments.length - 1];
             
             let ext = '';
             let baseName = filename || '';

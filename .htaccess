@@ -14,8 +14,8 @@ RewriteRule ^bao-quy-dau$ blog.html [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Proxy hình ảnh cho localhost (XAMPP)
-RewriteRule ^(.*\.([jJ][pP][gG]|[pP][nN][gG]|[wW][eE][bB][pP]|[gG][iI][fF]|[sS][vV][gG]))$ image.php?filename=$1 [L,QSA]
+# Proxy hình ảnh theo Phương án 2 (XAMPP)
+RewriteRule ^image/([a-zA-Z0-9]+)/(.*)$ image.php?id=$1 [L,QSA]
 # Hỗ trợ URL cũ phòng cache
 RewriteRule ^asset-proxy/([^/]+)/(.*)$ image.php?host=$1&path=$2 [L,NC]
 # Chuyển hướng các URL bài viết (slug) về chi-tiet-bai-viet.html để Javascript tự render (CSR)

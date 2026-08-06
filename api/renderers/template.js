@@ -73,7 +73,7 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
             cleanName = 'image.jpg';
         }
         
-        return `<img${p1}src="/${cleanName}"${p2}>`;
+        return `<img${p1}src="/image/${assetId}/${cleanName}"${p2}>`;
     });
     const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;
     html = html.replace(/<article class="skmd-article-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);
