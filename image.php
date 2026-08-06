@@ -1,7 +1,7 @@
 <?php
 // Script proxy hình ảnh cho Localhost (XAMPP) mô phỏng api/image.js
 if (isset($_GET['id'])) {
-    $id = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['id']);
+    $id = preg_replace('/[^a-zA-Z0-9\-_]/', '', $_GET['id']);
     $url = "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/{$id}";
     
     $headers = @get_headers($url, 1);

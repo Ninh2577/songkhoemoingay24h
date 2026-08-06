@@ -389,9 +389,9 @@ function skmdRewriteUrl(url, filename) {
             if (cleanName) {
                 if (!ext) ext = '.jpg';
                 cleanName += ext;
-                return `${base}${cleanName}`;
+                return `${base}image/${assetId}/${cleanName}`;
             } else {
-                return url; // Fallback if no filename is available
+                return `${base}image/${assetId}/image.jpg`; 
             }
         } catch (e) {
             return url;
@@ -425,7 +425,7 @@ const startIndex = (currentHomePg - 1) * postsPerPage;
 const displayPosts = allHomePosts.slice(startIndex, startIndex + postsPerPage);
 let html = '';
 displayPosts.forEach((post) => {
-const proxiedImg = skmdRewriteUrl(post.anh?.url, post.title ? (post.slug + '.jpg') : 'image.jpg');
+const proxiedImg = skmdRewriteUrl(post.anh?.url, post.anh?.fileName || (post.title ? (post.slug + '.jpg') : 'image.jpg'));
 const imgBg = proxiedImg
 ? `<img src="${proxiedImg}" alt="${post.title}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>`
 : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f3f4f6; font-size:4rem; color:#9ca3af;">${skmdEmoji(post.danhmuc)}</div>`;

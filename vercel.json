@@ -12,7 +12,7 @@
     { "source": "/dinh-chi-thai", "destination": "/blog.html" },
     { "source": "/bao-quy-dau", "destination": "/blog.html" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/image/:id([a-zA-Z0-9]+)/:filename(.*)", "destination": "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/:id" },
+    { "source": "/image/:id([a-zA-Z0-9\\-_]+)/:filename(.*)", "destination": "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/:id" },
     { "source": "/asset-proxy/:host/:env/:id/:filename(.*\\..+)", "destination": "https://:host/:env/:id" },
     { "source": "/asset-proxy/:host/:id/:filename(.*\\..+)", "destination": "https://:host/:id" },
     { "source": "/asset-proxy/:host/:path*", "destination": "https://:host/:path*" },
