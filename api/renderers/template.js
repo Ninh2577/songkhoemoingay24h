@@ -47,7 +47,7 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
         const filename = (titleMatch && titleMatch[1]) || (altMatch && altMatch[1]) || 'image.png';
         let cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
         if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
-        return `<img${p1}src="/asset-proxy/${region}/${envId}/${assetId}/${cleanName}"${p2}>`;
+        return `<img${p1}src="/asset-proxy/${region}.graphassets.com/${envId}/${assetId}/${cleanName}"${p2}>`;
     });
     const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;
     html = html.replace(/<article class="skmd-article-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);
