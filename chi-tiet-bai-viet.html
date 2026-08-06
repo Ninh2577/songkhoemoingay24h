@@ -486,21 +486,12 @@ const contentEl = document.getElementById('skmd-html-content');
         if (!window.__ARTICLE_DATA__) {
             contentEl.innerHTML = post.noiDung?.html || "<p>Nội dung đang được cập nhật...</p>";
         }
-        const assetMap = {};
-        if (post.noiDung && post.noiDung.references) {
-            post.noiDung.references.forEach(ref => {
-                if (ref.id && ref.fileName) {
-                    assetMap[ref.id] = ref.fileName;
-                }
-            });
-        }
-        
         // Process images inside content
         contentEl.querySelectorAll('img').forEach(img => {
             const match = img.src.match(/https:\/\/[a-z0-9\-]+\.graphassets\.com\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)/i);
             if (match && match[1]) {
                 const id = match[1];
-                let filename = assetMap[id] || img.getAttribute('title') || img.getAttribute('alt') || 'image.png';
+                let filename = img.getAttribute('title') || img.getAttribute('alt') || 'image.png';
                 img.src = skmdRewriteUrl(img.src, filename);
             }
         });
