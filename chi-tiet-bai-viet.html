@@ -388,11 +388,21 @@ function skmdGetBasePath() {
 function skmdRewriteUrl(url, filename) {
     if (!url) return url;
     const base = skmdGetBasePath();
-    const match = url.match(/https:\/\/[a-z0-9\-]+\.graphassets\.com\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)/i);
-    if (match && match[1]) {
-        const id = match[1];
-        const cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
-        return cleanName ? `${base}${id}/${cleanName}` : `${base}${id}`;
+    if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
+        try {
+            const parsed = new URL(url);
+            const host = parsed.hostname;
+            const pathSegments = parsed.pathname.split('/').filter(Boolean);
+            const cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
+            const pathString = pathSegments.join('/');
+            if (cleanName) {
+                return `${base}asset-proxy/${host}/${pathString}/${cleanName}`;
+            } else {
+                return `${base}asset-proxy/${host}/${pathString}`;
+            }
+        } catch (e) {
+            return url;
+        }
     }
     return url;
 }
@@ -488,9 +498,7 @@ const contentEl = document.getElementById('skmd-html-content');
         }
         // Process images inside content
         contentEl.querySelectorAll('img').forEach(img => {
-            const match = img.src.match(/https:\/\/[a-z0-9\-]+\.graphassets\.com\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)/i);
-            if (match && match[1]) {
-                const id = match[1];
+            if (img.src && (img.src.includes('graphassets.com') || img.src.includes('hygraph.com'))) {
                 let filename = img.getAttribute('title') || img.getAttribute('alt') || 'image.png';
                 img.src = skmdRewriteUrl(img.src, filename);
             }

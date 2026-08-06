@@ -15,6 +15,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Proxy hình ảnh cho localhost (XAMPP)
-RewriteRule ^asset-proxy/([^/]+)/([^/]+)/([^/]+)(/.*)?$ image.php?region=$1&env=$2&id=$3 [L,NC]
+RewriteRule ^asset-proxy/([^/]+)/(.*)$ image.php?host=$1&path=$2 [L,NC]
 # Chuyển hướng các URL bài viết (slug) về chi-tiet-bai-viet.html để Javascript tự render (CSR)
 RewriteRule ^([^/.]+)$ chi-tiet-bai-viet.html [L]

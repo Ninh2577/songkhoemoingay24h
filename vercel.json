@@ -12,8 +12,7 @@
     { "source": "/dinh-chi-thai", "destination": "/blog.html" },
     { "source": "/bao-quy-dau", "destination": "/blog.html" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/asset-proxy/:region/:env/:id/:path*", "destination": "https://:region.graphassets.com/:env/:id/:path*" },
-    { "source": "/asset-proxy/:region/:env/:id", "destination": "https://:region.graphassets.com/:env/:id" },
+    { "source": "/asset-proxy/:host/:path*", "destination": "https://:host/:path*" },
     { "source": "/:slug([^.]+)", "destination": "/api/render-article" }
   ]
 }
