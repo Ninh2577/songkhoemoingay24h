@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 
 /* ==========================================================================
    1. DESIGN TOKENS (Variables)
@@ -1850,8 +1850,7 @@ body.menu-open {
   }
 
   .skmd .skmd-mobile-share-bar {
-    display: flex;
-
+    display: none;
   }
 
 }
