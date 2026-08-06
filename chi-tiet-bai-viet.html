@@ -265,18 +265,18 @@ const HYGRAPH_URLS = [
 'https://ap-south-1.cdn.hygraph.com/content/cmrezpq25018t07walir17znu/master'
 ];
 const QUERY = `query GetArticle($slug: String!) {
-baiViets(where: { slug: $slug }, first: 1) {
-id
-title
-slug
-tomtat
-tacGia
-createdBy { name }
-danhmuc
-createdAt
-noiDung { html }
-anh { url }
-}
+    baiViets(where: { slug: $slug }, first: 1) {
+        id
+        title
+        slug
+        tomtat
+        tacGia
+        createdBy { name }
+        danhmuc
+        createdAt
+        noiDung { html }
+        anh { url fileName }
+    }
 }`;
 const RELATED_QUERY = `query GetRelated {
 baiViets(orderBy: createdAt_DESC, first: 5) {

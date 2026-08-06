@@ -313,17 +313,17 @@ const HYGRAPH_URLS = [
 'https://ap-south-1.cdn.hygraph.com/content/cmrezpq25018t07walir17znu/master'
 ];
 const QUERY = `{
-baiViets(orderBy: createdAt_DESC, first: 15) {
-id
-title
-slug
-tomtat
-tacGia
-createdBy { name }
-danhmuc
-noBat
-anh { url }
-}
+    baiViets(orderBy: createdAt_DESC, first: 15) {
+        id
+        title
+        slug
+        tomtat
+        tacGia
+        createdBy { name }
+        danhmuc
+        noBat
+        anh { url fileName }
+    }
 }`;
 function skmdCatSlug(cat) { if(!cat)return 'tin-tuc'; const c=cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); if(c.includes('kienthuc') || c.includes('kien thuc'))return 'kien-thuc-can-biet'; if(c.includes('tri'))return 'tri'; if(c.includes('thai'))return 'dinh-chi-thai'; if(c.includes('quydau') || c.includes('quy dau'))return 'bao-quy-dau'; return 'tin-tuc'; }
 function skmdCatName(cat) {

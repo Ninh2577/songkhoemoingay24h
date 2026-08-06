@@ -50,7 +50,7 @@ async function getArticleBySlug(slug) {
                 slug
                 tomtat
                 danhmuc
-                anh { url }
+                anh { url fileName }
                 tacGia
                 createdBy { name }
                 createdAt
