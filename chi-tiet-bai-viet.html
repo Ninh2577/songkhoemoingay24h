@@ -387,6 +387,7 @@ function skmdGetBasePath() {
 
 function skmdRewriteUrl(url, filename) {
     if (!url) return url;
+    if (url.includes('asset-proxy')) return url;
     const base = skmdGetBasePath();
     if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
         try {
