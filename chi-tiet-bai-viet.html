@@ -398,9 +398,10 @@ function skmdRewriteUrl(url, filename) {
             if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
             const pathString = pathSegments.join('/');
             if (cleanName) {
-                return `${base}asset-proxy/${host}/${pathString}/${cleanName}`;
+                // Return SEO friendly root URL
+                return `${base}${cleanName}`;
             } else {
-                return `${base}asset-proxy/${host}/${pathString}`;
+                return url; // Fallback if no filename is available
             }
         } catch (e) {
             return url;
