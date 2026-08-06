@@ -41,12 +41,38 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
 
     // Rewrite image URLs to use /asset-proxy/region/envId/assetId/fileName
     let finalHtml = article.contentHtml || '';
+    function skmdSlugify(str) {
+        if (!str) return '';
+        str = str.replace(/^\s+|\s+$/g, '').toLowerCase();
+        var from = "áàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ·/_,:;";
+        var to   = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyy------";
+        for (var i = 0, l = from.length; i < l; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+        return str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+    }
+
     finalHtml = finalHtml.replace(/<img([^>]*)src="https:\/\/([a-z0-9\-]+)\.graphassets\.com\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)"([^>]*)>/gi, (match, p1, region, envId, assetId, p2) => {
         const titleMatch = match.match(/title="([^"]+)"/i);
         const altMatch = match.match(/alt="([^"]+)"/i);
         const filename = (titleMatch && titleMatch[1]) || (altMatch && altMatch[1]) || 'image.png';
-        let cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
-        if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
+        
+        let ext = '';
+        let baseName = filename;
+        const lastDot = baseName.lastIndexOf('.');
+        if (lastDot !== -1 && lastDot > baseName.length - 6) {
+            ext = baseName.substring(lastDot);
+            baseName = baseName.substring(0, lastDot);
+        }
+        
+        let cleanName = skmdSlugify(baseName);
+        if (cleanName) {
+            if (!ext) ext = '.jpg';
+            cleanName += ext;
+        } else {
+            cleanName = 'image.jpg';
+        }
+        
         return `<img${p1}src="/${cleanName}"${p2}>`;
     });
     const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;

@@ -354,20 +354,41 @@ function skmdGetBasePath() {
     }
     return base;
 }
+function skmdSlugify(str) {
+    if (!str) return '';
+    str = str.replace(/^\s+|\s+$/g, '');
+    str = str.toLowerCase();
+    var from = "áàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ·/_,:;";
+    var to   = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyy------";
+    for (var i = 0, l = from.length; i < l; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+    str = str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+    return str;
+}
 
 function skmdRewriteUrl(url, filename) {
     if (!url) return url;
+    if (url.includes('asset-proxy')) return url;
     const base = skmdGetBasePath();
     if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
         try {
             const parsed = new URL(url);
             const host = parsed.hostname;
             const pathSegments = parsed.pathname.split('/').filter(Boolean);
-            let cleanName = filename ? filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '') : '';
-            if (cleanName && !cleanName.includes('.')) cleanName += '.jpg';
-            const pathString = pathSegments.join('/');
+            
+            let ext = '';
+            let baseName = filename || '';
+            const lastDot = baseName.lastIndexOf('.');
+            if (lastDot !== -1 && lastDot > baseName.length - 6) {
+                ext = baseName.substring(lastDot);
+                baseName = baseName.substring(0, lastDot);
+            }
+            
+            let cleanName = skmdSlugify(baseName);
             if (cleanName) {
-                // Return SEO friendly root URL
+                if (!ext) ext = '.jpg';
+                cleanName += ext;
                 return `${base}${cleanName}`;
             } else {
                 return url; // Fallback if no filename is available
