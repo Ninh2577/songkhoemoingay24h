@@ -180,9 +180,9 @@ class="ri-leaf-fill"></i> Đăng Ký Miễn Phí</button>
 const HYGRAPH_URLS = [
 'https://ap-south-1.cdn.hygraph.com/content/cmrezpq25018t07walir17znu/master'
 ];
-const QUERY_SIMPLE = `{ baiViets { id title } }`;
+const QUERY_SIMPLE = `{ baiViets(first: 100) { id title } }`;
 const QUERY = `{
-baiViets(orderBy: createdAt_DESC) {
+baiViets(first: 100, orderBy: createdAt_DESC) {
 id
 title
 slug
@@ -228,6 +228,11 @@ return grads[idx % grads.length];
 function skmdCatSlug(cat) { if(!cat)return 'tin-tuc'; const c=cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); if(c.includes('kienthuc') || c.includes('kien thuc'))return 'kien-thuc-can-biet'; if(c.includes('tri'))return 'tri'; if(c.includes('thai'))return 'dinh-chi-thai'; if(c.includes('quydau') || c.includes('quy dau'))return 'bao-quy-dau'; return 'tin-tuc'; }
 function skmdCatName(cat) {
 if (!cat) return 'Sức Khỏe';
+const c = cat.toLowerCase();
+if (c === 'kienthuc' || c === 'kienthuccanbiet') return 'Kiến thức cần biết';
+if (c === 'tri') return 'Trĩ';
+if (c === 'dinhchithai') return 'Đình chỉ thai';
+if (c === 'baoquydau') return 'Bao quy đầu';
 if (cat === 'KienThuc') return 'Kiến thức cần biết';
 if (cat === 'Tri') return 'Trĩ';
 if (cat === 'DinhChiThai') return 'Đình chỉ thai';
