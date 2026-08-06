@@ -39,14 +39,14 @@ function renderHtml(article, seoHeadStr, schemaScriptStr) {
     // Inject inside <head>
     html = html.replace('</head>', injectionBlock + '\n</head>');
 
-    // Rewrite image URLs to use /ID/fileName
+    // Rewrite image URLs to use /asset-proxy/region/envId/assetId/fileName
     let finalHtml = article.contentHtml || '';
-    finalHtml = finalHtml.replace(/<img([^>]*)src="https:\/\/[a-z0-9\-]+\.graphassets\.com\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)"([^>]*)>/gi, (match, p1, envId, assetId, p2) => {
+    finalHtml = finalHtml.replace(/<img([^>]*)src="https:\/\/([a-z0-9\-]+)\.graphassets\.com\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)"([^>]*)>/gi, (match, p1, region, envId, assetId, p2) => {
         const titleMatch = match.match(/title="([^"]+)"/i);
         const altMatch = match.match(/alt="([^"]+)"/i);
         const filename = (titleMatch && titleMatch[1]) || (altMatch && altMatch[1]) || 'image.png';
         const cleanName = filename.replace(/[^a-zA-Z0-9\.\-\_\(\)\s]/g, '');
-        return `<img${p1}src="/${assetId}/${cleanName}"${p2}>`;
+        return `<img${p1}src="/asset-proxy/${region}/${envId}/${assetId}/${cleanName}"${p2}>`;
     });
     const contentToInject = `<article class="skmd-article-content" id="skmd-html-content">${finalHtml}</article>`;
     html = html.replace(/<article class="skmd-article-content" id="skmd-html-content">.*?<\/article>/is, contentToInject);

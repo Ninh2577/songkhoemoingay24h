@@ -1,16 +1,15 @@
 <?php
-// Script proxy hình ảnh cho Localhost (XAMPP) bằng Asset ID
-if (isset($_GET['id'])) {
+// Script proxy hình ảnh động dành cho Localhost (XAMPP)
+if (isset($_GET['id']) && isset($_GET['region']) && isset($_GET['env'])) {
+    $region = preg_replace('/[^a-zA-Z0-9\-]/', '', $_GET['region']);
+    $env = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['env']);
     $id = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['id']);
-    $url = "https://ap-south-1.graphassets.com/cmrezpqjy0epy06pp7qgqcua7/" . $id;
     
-    // Lấy Content-Type thật từ Hygraph
+    $url = "https://{$region}.graphassets.com/{$env}/{$id}";
+    
     $headers = @get_headers($url, 1);
     $contentType = isset($headers['Content-Type']) ? $headers['Content-Type'] : (isset($headers['content-type']) ? $headers['content-type'] : 'image/jpeg');
-    
-    if (is_array($contentType)) {
-        $contentType = end($contentType);
-    }
+    if (is_array($contentType)) $contentType = end($contentType);
     
     header("Content-Type: " . $contentType);
     header("Cache-Control: public, max-age=86400");
