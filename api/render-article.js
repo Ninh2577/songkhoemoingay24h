@@ -5,7 +5,18 @@ const { buildSchemaScript } = require('./builders/schema');
 const { renderHtml } = require('./renderers/template');
 const CONFIG = require('./config');
 
+const fs = require('fs');
+const path = require('path');
+
 function buildErrorResponse(res, statusCode, message) {
+    if (statusCode === 404) {
+        try {
+            const page404 = fs.readFileSync(path.join(__dirname, '../404.html'), 'utf8');
+            return res.status(404).setHeader('Content-Type', 'text/html; charset=utf-8').send(page404);
+        } catch(e) {
+            console.error("Failed to load 404.html", e);
+        }
+    }
     return res.status(statusCode).send(`<h1>${statusCode} - ${message}</h1><p>Vui lòng thử lại sau.</p>`);
 }
 

@@ -256,7 +256,7 @@ style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" alt="T
 <h3>Đăng Ký Nhận Bản Tin</h3>
 <p>Nhận ngay những kiến thức y tế mới nhất mỗi tuần từ chuyên gia của chúng tôi.</p>
 </div>
-<form class="newsletter-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!');">
+<form class="newsletter-form" onsubmit="window.skmdShowPopup(event)">
 <input type="email" placeholder="Nhập email của bạn..." required>
 <button type="submit" class="skmd-btn skmd-btn--primary">Đăng Ký</button>
 </form>
@@ -291,10 +291,10 @@ style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" alt="T
 <div class="skmd-footer__links">
 <h4 class="skmd-footer__heading">Về Chúng Tôi</h4>
 <nav class="skmd-footer__nav">
-<a href="#"><i class="ri-arrow-right-s-line"></i> Giới Thiệu</a>
-<a href="#"><i class="ri-arrow-right-s-line"></i> Điều Khoản Sử Dụng</a>
-<a href="#"><i class="ri-arrow-right-s-line"></i> Chính Sách Bảo Mật</a>
-<a href="#"><i class="ri-arrow-right-s-line"></i> Miễn Trừ Trách Nhiệm</a>
+<a href="/gioi-thieu"><i class="ri-arrow-right-s-line"></i> Giới Thiệu</a>
+<a href="/dieu-khoan-su-dung"><i class="ri-arrow-right-s-line"></i> Điều Khoản Sử Dụng</a>
+<a href="/chinh-sach-bao-mat"><i class="ri-arrow-right-s-line"></i> Chính Sách Bảo Mật</a>
+<a href="/mien-tru-trach-nhiem"><i class="ri-arrow-right-s-line"></i> Miễn Trừ Trách Nhiệm</a>
 </nav>
 </div>
 
@@ -664,6 +664,35 @@ else header.classList.remove('skmd-header--scrolled');
 });
 }
 })();
+</script>
+<script>
+window.skmdShowPopup = function(e) {
+  if (e) e.preventDefault();
+  let modal = document.getElementById('skmd-custom-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'skmd-custom-modal';
+    modal.className = 'skmd-modal-overlay';
+    modal.innerHTML = `
+      <div class="skmd-modal">
+        <button class="skmd-modal__close-top" onclick="window.skmdClosePopup()"><i class="ri-close-line"></i></button>
+        <div class="skmd-modal__icon">
+          <i class="ri-settings-4-fill"></i>
+        </div>
+        <h3 class="skmd-modal__title">Chức Năng Đang Phát Triển</h3>
+        <p class="skmd-modal__desc">Cảm ơn bạn đã quan tâm. Đội ngũ chuyên gia của chúng tôi đang hoàn thiện tính năng này để mang lại trải nghiệm tốt nhất. Vui lòng quay lại sau!</p>
+        <button class="skmd-modal__close" onclick="window.skmdClosePopup()">Đã Hiểu</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  void modal.offsetWidth;
+  modal.classList.add('is-active');
+};
+window.skmdClosePopup = function() {
+  const modal = document.getElementById('skmd-custom-modal');
+  if (modal) modal.classList.remove('is-active');
+};
 </script>
 </body>
 </html>
