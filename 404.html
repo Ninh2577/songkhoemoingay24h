@@ -132,7 +132,7 @@
       
       <div class="skmd-404-image-col">
         <div class="skmd-404-image-bg-text">404</div>
-        <img src="/404-doctor.png" alt="404 Not Found" class="skmd-404-image" />
+        <img src="/404-doctor-new.jpg" alt="404 Not Found" class="skmd-404-image" onerror="this.src='/404-doctor.png'" />
       </div>
     </div>
   </div>
@@ -202,7 +202,7 @@ window.skmdShowPopup = function(e) {
     modal = document.createElement('div');
     modal.id = 'skmd-custom-modal';
     modal.className = 'skmd-modal-overlay';
-    modal.innerHTML = \`
+    modal.innerHTML = `
       <div class="skmd-modal">
         <button class="skmd-modal__close-top" onclick="window.skmdClosePopup()"><i class="ri-close-line"></i></button>
         <div class="skmd-modal__icon">
@@ -212,7 +212,7 @@ window.skmdShowPopup = function(e) {
         <p class="skmd-modal__desc">Cảm ơn bạn đã quan tâm. Đội ngũ chuyên gia của chúng tôi đang hoàn thiện tính năng này để mang lại trải nghiệm tốt nhất. Vui lòng quay lại sau!</p>
         <button class="skmd-modal__close" onclick="window.skmdClosePopup()">Đã Hiểu</button>
       </div>
-    \`;
+    `;
     document.body.appendChild(modal);
   }
   void modal.offsetWidth;
