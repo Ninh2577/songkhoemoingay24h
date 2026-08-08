@@ -44,9 +44,29 @@ function escapeHtml(unsafe) {
          .replace(/'/g, "&#039;");
 }
 
+/**
+ * Resolves and sanitizes the SEO description to remove fake YMYL claims
+ * and acts as a single source of truth for all description metadata.
+ */
+function resolveSeoDescription(article, defaultDesc) {
+    let desc = article.excerpt || defaultDesc;
+    if (!desc) return '';
+    
+    // Remove fake medical claims gracefully
+    desc = desc
+        .replace(/[,.]?\s*(dựa trên|với|nhận)?\s*(lời khuyên|tư vấn) từ\s*(chuyên gia|bác sĩ)[^.]*(?=\.|$)/gi, '')
+        .replace(/[,.]?\s*được\s*(kiểm duyệt y khoa|bác sĩ xác nhận)[^.]*(?=\.|$)/gi, '')
+        .replace(/chuyên gia y tế|chuyên gia phụ sản|đội ngũ bác sĩ|bác sĩ tư vấn/gi, 'đội ngũ nội dung');
+        
+    // Cleanup punctuation
+    desc = desc.replace(/\s+/g, ' ').replace(/\s+\./g, '.').replace(/\.\./g, '.').trim();
+    return desc;
+}
+
 module.exports = {
     skmdCatSlug,
     skmdCatName,
     normalizeSlug,
-    escapeHtml
+    escapeHtml,
+    resolveSeoDescription
 };

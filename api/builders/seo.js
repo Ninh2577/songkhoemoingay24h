@@ -1,19 +1,10 @@
 const CONFIG = require('../config');
-const { escapeHtml } = require('../utils/helpers');
-
-function sanitizeYmyl(text) {
-    if (!text) return text;
-    return text
-        .replace(/lời khuyên từ chuyên gia phụ sản/gi, "Ban Biên tập Sống Khỏe Mỗi Ngày")
-        .replace(/chuyên gia y tế/gi, "Ban Biên tập")
-        .replace(/đội ngũ bác sĩ/gi, "đội ngũ biên tập")
-        .replace(/kiểm duyệt y khoa/gi, "biên tập nội dung")
-        .replace(/chuyên gia của chúng tôi/gi, "Ban Biên tập");
-}
+const { escapeHtml, resolveSeoDescription } = require('../utils/helpers');
 
 function buildSeoHead(article) {
     const title = escapeHtml(article.title + CONFIG.TITLE_SUFFIX);
-    const description = escapeHtml(sanitizeYmyl(article.excerpt || CONFIG.DEFAULT_DESCRIPTION));
+    const seoDescription = resolveSeoDescription(article, CONFIG.DEFAULT_DESCRIPTION);
+    const description = escapeHtml(seoDescription);
     const imageUrl = article.coverImage || CONFIG.DEFAULT_OG_IMAGE;
     const url = `${CONFIG.SITE_URL}/${article.slug}`;
 
@@ -33,7 +24,7 @@ function buildSeoHead(article) {
         <meta property="og:image" content="${imageUrl}" />
         <meta property="article:published_time" content="${article.dates.published}" />
         <meta property="article:modified_time" content="${article.dates.modified}" />
-        <meta property="article:author" content="${escapeHtml(article.authorName)}" />
+        <meta property="article:author" content="Ban Biên tập Sống Khỏe Mỗi Ngày" />
         <meta property="article:section" content="${escapeHtml(article.category.name)}" />
         
         <!-- Twitter -->

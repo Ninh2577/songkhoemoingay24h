@@ -1,4 +1,5 @@
 const CONFIG = require('../config');
+const { resolveSeoDescription } = require('../utils/helpers');
 
 function buildSchemaScript(article) {
     const url = `${CONFIG.SITE_URL}/${article.slug}`;
@@ -46,7 +47,7 @@ function buildSchemaScript(article) {
                     "@id": `${CONFIG.SITE_URL}/#editorial-team`
                 },
                 "headline": article.title,
-                "description": article.excerpt || CONFIG.DEFAULT_DESCRIPTION,
+                "description": resolveSeoDescription(article, CONFIG.DEFAULT_DESCRIPTION),
                 "image": imageUrl ? {
                     "@type": "ImageObject",
                     "url": imageUrl
