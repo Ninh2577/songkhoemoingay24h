@@ -72,12 +72,11 @@ function renderBreadcrumb(article) {
     const url = `${CONFIG.SITE_URL}/${article.slug}`;
     const catUrl = `${CONFIG.SITE_URL}/${article.category.slug}`;
     return `
-<nav aria-label="Breadcrumb" class="skmd-breadcrumb" style="justify-content: center; margin-bottom: 12px; gap: 8px;">
-    <ol style="list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; justify-content:center; gap:8px;">
+<nav aria-label="Breadcrumb" class="skmd-breadcrumb" style="justify-content: flex-start; margin-bottom: 0; gap: 8px;">
+    <ol style="list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; justify-content:flex-start; gap:8px;">
         <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${CONFIG.SITE_URL}">Trang Chủ</a> <span>&bull;</span></li>
         <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${CONFIG.SITE_URL}/blog">Blog</a> <span>&bull;</span></li>
-        <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${catUrl}">${article.category.name}</a> <span>&bull;</span></li>
-        <li style="display:flex; align-items:center;"><span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700; word-break:normal;" aria-current="page">${article.title}</span></li>
+        <li style="display:flex; align-items:center; white-space:nowrap;"><a href="${catUrl}" style="color:var(--color-primary-dark); font-weight:700;" aria-current="page">${article.category.name}</a></li>
     </ol>
 </nav>
     `;
