@@ -15,6 +15,7 @@ function buildSeoHead(article) {
         <link rel="canonical" href="${url}" />
         
         <!-- Open Graph / Facebook / Zalo -->
+        <meta property="og:site_name" content="Sống Khỏe Mỗi Ngày 24h" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="${url}" />
         <meta property="og:title" content="${title}" />

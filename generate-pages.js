@@ -3,11 +3,11 @@ const fs = require('fs');
 const html = fs.readFileSync('home.html', 'utf8');
 
 // Extract Header and Footer
-const headerMatch = html.match(/<header class="skmd-header">[\s\S]*?<\/header>/);
+const headerMatch = html.match(/<header class="skmd-header"[^>]*>[\s\S]*?<\/header>/);
 const footerMatch = html.match(/<footer class="skmd-footer">[\s\S]*?<\/footer>/);
 const scriptMatch = html.match(/<script>[\s\S]*?window\.skmdShowPopup[\s\S]*?<\/script>/);
 
-if (!headerMatch || !footerMatch) {
+if (!headerMatch || !footerMatch || !scriptMatch) {
   console.error("Could not find header or footer");
   process.exit(1);
 }
@@ -21,8 +21,17 @@ const template = (title, content) => `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>\${title} - Sống Khỏe Mỗi Ngày</title>
+<title>${title} - Sống Khỏe Mỗi Ngày 24h</title>
+<meta property="og:site_name" content="Sống Khỏe Mỗi Ngày 24h" />
 <link rel="icon" type="image/svg+xml" href="/favicon_46ozzcminjco6vl4qpkay.svg" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sống Khỏe Mỗi Ngày 24h",
+  "url": "https://songkhoemoingay24h.vercel.app/"
+}
+</script>
 <link rel="stylesheet" href="./style.css?v=3">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -40,21 +49,21 @@ const template = (title, content) => `<!DOCTYPE html>
 </style>
 </head>
 <body class="skmd">
-\${header}
+${header}
 
 <main class="skmd-static-page">
   <div class="skmd-container skmd-static-container">
     <div class="skmd-static-header">
-      <h1 class="skmd-static-title">\${title}</h1>
+      <h1 class="skmd-static-title">${title}</h1>
     </div>
     <div class="skmd-static-content">
-      \${content}
+      ${content}
     </div>
   </div>
 </main>
 
-\${footer}
-\${script}
+${footer}
+${script}
 </body>
 </html>`;
 
@@ -62,7 +71,7 @@ const pages = [
   {
     file: 'gioi-thieu.html',
     title: 'Giới Thiệu Về Sống Khỏe Mỗi Ngày',
-    content: \`
+    content: `
       <h2>1. Sứ mệnh của chúng tôi</h2>
       <p>Chào mừng bạn đến với <strong>Sống Khỏe Mỗi Ngày</strong>. Sứ mệnh cốt lõi của chúng tôi là mang đến cho cộng đồng những kiến thức y khoa, sức khỏe chính xác, dễ hiểu và dễ áp dụng nhất. Chúng tôi tin rằng, một cuộc sống khỏe mạnh bắt nguồn từ những thói quen nhỏ mỗi ngày và sự hiểu biết đúng đắn về cơ thể mình.</p>
       
@@ -78,12 +87,12 @@ const pages = [
       
       <h2>4. Liên hệ</h2>
       <p>Nếu bạn có bất kỳ thắc mắc hay góp ý nào, xin vui lòng liên hệ với chúng tôi qua thông tin được cung cấp ở phần cuối trang web. Đội ngũ của chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn.</p>
-    \`
+    `
   },
   {
     file: 'dieu-khoan-su-dung.html',
     title: 'Điều Khoản Sử Dụng',
-    content: \`
+    content: `
       <h2>1. Chấp nhận điều khoản</h2>
       <p>Bằng việc truy cập và sử dụng website <strong>Sống Khỏe Mỗi Ngày</strong>, bạn đồng ý tuân thủ các Điều Khoản Sử Dụng này. Nếu bạn không đồng ý với bất kỳ phần nào của các điều khoản, vui lòng ngừng sử dụng website ngay lập tức.</p>
 
@@ -102,12 +111,12 @@ const pages = [
 
       <h2>5. Thay đổi điều khoản</h2>
       <p>Chúng tôi có quyền cập nhật và chỉnh sửa Điều Khoản Sử Dụng này bất kỳ lúc nào mà không cần báo trước. Việc bạn tiếp tục sử dụng website sau khi có sự thay đổi đồng nghĩa với việc bạn chấp nhận các điều khoản mới đó.</p>
-    \`
+    `
   },
   {
     file: 'chinh-sach-bao-mat.html',
     title: 'Chính Sách Bảo Mật',
-    content: \`
+    content: `
       <h2>1. Cam kết không thu thập thông tin cá nhân</h2>
       <p>Tại <strong>Sống Khỏe Mỗi Ngày</strong>, chúng tôi đề cao và tôn trọng quyền riêng tư của bạn. Chúng tôi cam kết <strong>đảm bảo không thu thập thông tin cá nhân</strong> (như tên, số điện thoại, địa chỉ nhà) từ người dùng trong quá trình bạn đọc bài và trải nghiệm website.</p>
       <p>Chức năng đăng ký nhận bản tin qua email hiện tại chỉ là tính năng thử nghiệm và đang trong quá trình phát triển, do đó hệ thống không lưu trữ hay xử lý bất kỳ email nào của bạn vào cơ sở dữ liệu.</p>
@@ -120,12 +129,12 @@ const pages = [
       
       <h2>4. Thay đổi chính sách</h2>
       <p>Chúng tôi bảo lưu quyền thay đổi Chính Sách Bảo Mật này bất cứ lúc nào để phù hợp với các thay đổi trong quy định pháp luật hoặc quá trình vận hành website. Mọi thay đổi sẽ được cập nhật công khai tại trang này.</p>
-    \`
+    `
   },
   {
     file: 'mien-tru-trach-nhiem.html',
     title: 'Miễn Trừ Trách Nhiệm Y Khoa',
-    content: \`
+    content: `
       <h2>1. Thông tin chỉ mang tính chất tham khảo</h2>
       <p>Tất cả nội dung bao gồm văn bản, hình ảnh, đồ họa và các tài liệu khác trên <strong>Sống Khỏe Mỗi Ngày</strong> chỉ nhằm mục đích cung cấp thông tin tham khảo giáo dục. Nội dung không được thiết kế hoặc có ý định thay thế cho những lời khuyên, chẩn đoán, hoặc điều trị y khoa chuyên nghiệp từ các bác sĩ hoặc chuyên gia y tế.</p>
 
@@ -137,7 +146,7 @@ const pages = [
 
       <h2>4. Không chịu trách nhiệm hệ quả</h2>
       <p>Sống Khỏe Mỗi Ngày, ban quản trị, biên tập viên, và các đối tác liên quan hoàn toàn không chịu bất kỳ trách nhiệm pháp lý nào đối với những tổn thất, rủi ro, thiệt hại cá nhân hay tài sản phát sinh trực tiếp hoặc gián tiếp từ việc ứng dụng hoặc tin tưởng vào các thông tin được cung cấp trên website này.</p>
-    \`
+    `
   }
 ];
 
