@@ -32,7 +32,7 @@ const template = (title, content) => `<!DOCTYPE html>
   "url": "https://songkhoemoingay24h.vercel.app/"
 }
 </script>
-<link rel="stylesheet" href="./style.css?v=4">
+<link rel="stylesheet" href="/style.css?v=4">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
