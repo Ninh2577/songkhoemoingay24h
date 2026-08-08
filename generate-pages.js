@@ -169,7 +169,7 @@ const pages = [
   },
   {
     file: 'chinh-sach-bien-tap.html',
-    title: 'Chính Sách Biên Tập & Kiểm Duyệt Y Khoa',
+    title: 'Chính Sách Biên Tập Nội Dung',
     content: `
       <h2>1. Tôn chỉ Biên Tập</h2>
       <p>Mục tiêu lớn nhất của chúng tôi là trở thành nguồn thông tin y khoa và sức khỏe đáng tin cậy nhất của bạn. Mọi bài viết trên <strong>Sống Khỏe Mỗi Ngày</strong> đều tuân thủ nguyên tắc: <strong>Chính xác - Khách quan - Minh bạch - Đồng cảm</strong>.</p>

@@ -4,6 +4,7 @@
   "description": "Song Khoe Moi Ngay",
   "private": true,
   "dependencies": {
+    "cheerio": "^1.2.0",
     "express": "^5.2.1"
   }
 }

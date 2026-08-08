@@ -35,8 +35,7 @@ function buildSchemaScript(article) {
                 "@id": `${url}#webpage`,
                 "url": url,
                 "name": article.title,
-                "isPartOf": { "@id": `${CONFIG.SITE_URL}/#website` },
-                "about": { "@id": `${CONFIG.SITE_URL}/#organization` }
+                "isPartOf": { "@id": `${CONFIG.SITE_URL}/#website` }
             },
             {
                 "@type": "Article",

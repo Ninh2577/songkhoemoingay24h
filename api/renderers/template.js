@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const CONFIG = require('../config');
+const cheerio = require('cheerio');
 
 // In-memory cache for the template during warm lambda execution
 let cachedTemplate = null;
@@ -136,12 +137,51 @@ function renderHtml(article, seoHeadStr, schemaScriptStr, rawRelated) {
     
     let thumbHtml = '';
     if (article.coverImage) {
-        let cleanImg = rewriteImageUrls(`<img src="${article.coverImage}" class="skmd-article-hero__img" alt="${safeTitle}" />`);
+        let cleanImg = rewriteImageUrls(`<img src="${article.coverImage}" class="skmd-article-hero__img" alt="${safeTitle}" width="1200" height="675" fetchpriority="high" decoding="async" />`);
         thumbHtml = `${cleanImg}<div class="skmd-article-hero__caption">Ảnh minh họa chuẩn y khoa</div>`;
     }
     html = html.replace('{{ARTICLE_THUMB_HTML}}', () => thumbHtml);
 
     let finalContent = rewriteImageUrls(article.contentHtml || '');
+    
+    // Normalize HTML using Cheerio
+    if (finalContent) {
+        try {
+            const $ = cheerio.load(finalContent, null, false);
+            
+            // Normalize Tables
+            $('table').each(function() {
+                // Change td to th in thead
+                $(this).find('thead td').each(function() {
+                    const th = $('<th scope="col"></th>').html($(this).html());
+                    // copy attributes
+                    const attrs = $(this)[0].attributes;
+                    if (attrs) {
+                        for (let i = 0; i < attrs.length; i++) {
+                            th.attr(attrs[i].name, attrs[i].value);
+                        }
+                    }
+                    $(this).replaceWith(th);
+                });
+                
+                // Wrap table for responsiveness if not already wrapped
+                if (!$(this).parent().hasClass('skmd-table-wrapper')) {
+                    $(this).wrap('<div class="skmd-table-wrapper" style="overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%; margin-bottom:var(--space-6);"></div>');
+                }
+            });
+            
+            // Normalize Content Images
+            $('img').each(function() {
+                $(this).attr('loading', 'lazy');
+                $(this).attr('decoding', 'async');
+            });
+            
+            finalContent = $.html();
+        } catch (err) {
+            console.error('Error normalizing HTML:', err);
+        }
+    }
+    
     html = html.replace('{{ARTICLE_CONTENT}}', () => finalContent);
 
     return html;
