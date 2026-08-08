@@ -8,31 +8,57 @@ function buildSchemaScript(article) {
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "Organization",
+                "@id": `${CONFIG.SITE_URL}/#editorial-team`,
+                "name": "Ban Biên tập Sống Khỏe Mỗi Ngày",
+                "url": `${CONFIG.SITE_URL}/gioi-thieu/ban-bien-tap.html`
+            },
+            {
+                "@type": "Organization",
+                "@id": `${CONFIG.SITE_URL}/#organization`,
+                "name": CONFIG.DEFAULT_TITLE,
+                "url": CONFIG.SITE_URL,
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": CONFIG.DEFAULT_OG_IMAGE
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": `${CONFIG.SITE_URL}/#website`,
+                "url": CONFIG.SITE_URL,
+                "name": CONFIG.DEFAULT_TITLE,
+                "publisher": { "@id": `${CONFIG.SITE_URL}/#organization` }
+            },
+            {
+                "@type": "MedicalWebPage",
+                "@id": `${url}#webpage`,
+                "url": url,
+                "name": article.title,
+                "isPartOf": { "@id": `${CONFIG.SITE_URL}/#website` },
+                "about": { "@id": `${CONFIG.SITE_URL}/#organization` }
+            },
+            {
                 "@type": "Article",
                 "@id": `${url}#article`,
                 "isPartOf": { "@id": `${url}#webpage` },
+                "mainEntityOfPage": { "@id": `${url}#webpage` },
                 "author": {
-                    "@type": "Person",
-                    "name": article.authorName
+                    "@id": `${CONFIG.SITE_URL}/#editorial-team`
                 },
                 "headline": article.title,
                 "description": article.excerpt || CONFIG.DEFAULT_DESCRIPTION,
-                "image": imageUrl,
+                "image": imageUrl ? {
+                    "@type": "ImageObject",
+                    "url": imageUrl
+                } : undefined,
                 "datePublished": article.dates.published,
                 "dateModified": article.dates.modified,
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": `${url}#webpage`
-                },
                 "publisher": {
-                    "@type": "Organization",
-                    "@id": `${CONFIG.SITE_URL}/#organization`,
-                    "name": CONFIG.DEFAULT_TITLE,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": CONFIG.DEFAULT_OG_IMAGE
-                    }
-                }
+                    "@id": `${CONFIG.SITE_URL}/#organization`
+                },
+                "articleSection": article.category.name,
+                "inLanguage": "vi-VN"
             },
             {
                 "@type": "BreadcrumbList",
@@ -41,18 +67,24 @@ function buildSchemaScript(article) {
                     {
                         "@type": "ListItem",
                         "position": 1,
-                        "name": "Trang chủ",
+                        "name": "Trang Chủ",
                         "item": CONFIG.SITE_URL
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
+                        "name": "Blog",
+                        "item": `${CONFIG.SITE_URL}/blog`
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
                         "name": article.category.name,
                         "item": `${CONFIG.SITE_URL}/${article.category.slug}`
                     },
                     {
                         "@type": "ListItem",
-                        "position": 3,
+                        "position": 4,
                         "name": article.title,
                         "item": url
                     }

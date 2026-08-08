@@ -43,9 +43,13 @@ module.exports = async function handler(req, res) {
         }
 
         const article = normalizeArticle(rawArticle);
+        
+        // Fetch related articles
+        const rawRelated = await require('./providers/hygraph').getRelatedArticles(slug, rawArticle.danhmuc, 5);
+        
         const seoHeadStr = buildSeoHead(article);
         const schemaScriptStr = buildSchemaScript(article);
-        const finalHtml = renderHtml(article, seoHeadStr, schemaScriptStr);
+        const finalHtml = renderHtml(article, seoHeadStr, schemaScriptStr, rawRelated);
 
         const latency = Date.now() - startTime;
         console.log(JSON.stringify({

@@ -110,12 +110,12 @@ style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#bbf7d0">
 Nhận bài mỗi tuần</div>
 <p style="font-size:.82rem;color:#4b5563;margin-bottom:12px;line-height:1.6">Không bỏ lỡ bài viết
 sức khỏe mới nhất!</p>
-<div class="nl-mini">
-<input type="email" placeholder="Email của bạn..." />
-<button class="skmd-btn skmd-btn--primary"
+<form class="nl-mini" onsubmit="window.skmdShowPopup(event)">
+<input type="email" placeholder="Email của bạn..." required />
+<button type="submit" class="skmd-btn skmd-btn--primary"
 style="width:100%;justify-content:center;font-size:.84rem;padding:10px"><i
 class="ri-leaf-fill"></i> Đăng Ký Miễn Phí</button>
-</div>
+</form>
 </div>
 </aside>
 </div>

@@ -79,6 +79,44 @@ async function getArticleBySlug(slug) {
     return data.data?.baiViets?.[0] || null;
 }
 
+/**
+ * Fetches related articles by category
+ */
+async function getRelatedArticles(excludeSlug, danhmuc, limit = 5) {
+    const QUERY = `
+        query GetRelated($excludeSlug: String!, $danhmuc: DanhMuc, $limit: Int!) {
+            baiViets(
+                where: { slug_not: $excludeSlug, danhmuc: $danhmuc },
+                orderBy: createdAt_DESC,
+                first: $limit
+            ) {
+                title
+                slug
+                danhmuc
+                anh { url }
+                createdAt
+            }
+        }
+    `;
+
+    // Try with exact category, fallback to any if no category provided
+    const variables = { excludeSlug, danhmuc: danhmuc || undefined, limit };
+
+    const data = await fetchWithRetry(CONFIG.HYGRAPH_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: QUERY, variables })
+    });
+
+    if (data.errors) {
+        console.error("Hygraph GraphQL Errors (Related):", JSON.stringify(data.errors));
+        return [];
+    }
+
+    return data.data?.baiViets || [];
+}
+
 module.exports = {
-    getArticleBySlug
+    getArticleBySlug,
+    getRelatedArticles
 };

@@ -2,5 +2,8 @@
   "name": "songkhoemoingay",
   "version": "1.0.0",
   "description": "Song Khoe Moi Ngay",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }

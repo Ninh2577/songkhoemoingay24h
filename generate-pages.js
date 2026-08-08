@@ -147,10 +147,63 @@ const pages = [
       <h2>4. Không chịu trách nhiệm hệ quả</h2>
       <p>Sống Khỏe Mỗi Ngày, ban quản trị, biên tập viên, và các đối tác liên quan hoàn toàn không chịu bất kỳ trách nhiệm pháp lý nào đối với những tổn thất, rủi ro, thiệt hại cá nhân hay tài sản phát sinh trực tiếp hoặc gián tiếp từ việc ứng dụng hoặc tin tưởng vào các thông tin được cung cấp trên website này.</p>
     `
+  },
+  {
+    file: 'gioi-thieu/ban-bien-tap.html',
+    title: 'Ban Biên Tập Sống Khỏe Mỗi Ngày',
+    content: `
+      <h2>Đội ngũ của chúng tôi</h2>
+      <p>Tại Sống Khỏe Mỗi Ngày, chúng tôi tự hào sở hữu <strong>Ban Biên Tập</strong> - một đội ngũ những chuyên gia nội dung tận tụy, am hiểu y tế, luôn làm việc với tôn chỉ mang lại thông tin chính xác, khách quan và dễ hiểu nhất cho cộng đồng.</p>
+      
+      <h2>Trách nhiệm và Vai trò</h2>
+      <ul>
+        <li><strong>Nghiên cứu & Tổng hợp:</strong> Tìm kiếm, tổng hợp thông tin từ các tài liệu y khoa chính thống, các tạp chí khoa học quốc tế uy tín (như WHO, NIH, PubMed).</li>
+        <li><strong>Biên soạn dễ hiểu:</strong> Chuyển ngữ và biên soạn các thuật ngữ y khoa phức tạp thành ngôn từ đại chúng, gần gũi, giúp người đọc dễ dàng tiếp nhận.</li>
+        <li><strong>Kiểm duyệt chéo:</strong> Mỗi bài viết trước khi xuất bản đều trải qua ít nhất 2 vòng kiểm duyệt nội bộ để đảm bảo không có sai sót về chuyên môn.</li>
+        <li><strong>Cập nhật liên tục:</strong> Y học luôn thay đổi. Ban Biên Tập chịu trách nhiệm theo dõi và cập nhật thường xuyên nội dung các bài viết cũ để phản ánh những tiến bộ y khoa mới nhất.</li>
+      </ul>
+      
+      <h2>Cam kết minh bạch</h2>
+      <p>Để đảm bảo tính khách quan và độc lập, Ban Biên Tập làm việc độc lập hoàn toàn với các nhà tài trợ hay các đơn vị quảng cáo. Mọi nội dung y khoa đều xuất phát từ bằng chứng khoa học, <strong>KHÔNG</strong> chịu ảnh hưởng bởi mục đích thương mại.</p>
+    `
+  },
+  {
+    file: 'chinh-sach-bien-tap.html',
+    title: 'Chính Sách Biên Tập & Kiểm Duyệt Y Khoa',
+    content: `
+      <h2>1. Tôn chỉ Biên Tập</h2>
+      <p>Mục tiêu lớn nhất của chúng tôi là trở thành nguồn thông tin y khoa và sức khỏe đáng tin cậy nhất của bạn. Mọi bài viết trên <strong>Sống Khỏe Mỗi Ngày</strong> đều tuân thủ nguyên tắc: <strong>Chính xác - Khách quan - Minh bạch - Đồng cảm</strong>.</p>
+
+      <h2>2. Nguồn tài liệu uy tín</h2>
+      <p>Chúng tôi tuyệt đối không sử dụng thông tin từ các nguồn thiếu kiểm chứng, tin đồn hoặc các phương pháp chữa bệnh không có cơ sở khoa học. Các tài liệu tham khảo chính của chúng tôi bao gồm:</p>
+      <ul>
+        <li>Tổ chức Y tế Thế giới (WHO).</li>
+        <li>Viện Y tế Quốc gia Hoa Kỳ (NIH).</li>
+        <li>Các trung tâm kiểm soát và phòng ngừa dịch bệnh (CDC).</li>
+        <li>Các tạp chí y khoa quốc tế như The Lancet, JAMA, PubMed.</li>
+      </ul>
+
+      <h2>3. Quy trình xuất bản nghiêm ngặt</h2>
+      <ul>
+        <li><strong>Bước 1 - Lên ý tưởng & Nghiên cứu:</strong> Đề tài được lựa chọn dựa trên nhu cầu tìm kiếm của người dùng và các vấn đề sức khỏe cộng đồng. Biên tập viên sẽ tiến hành nghiên cứu tài liệu từ các nguồn chuẩn y khoa.</li>
+        <li><strong>Bước 2 - Soạn thảo:</strong> Nội dung được viết bằng ngôn ngữ thân thiện, mạch lạc, dễ hiểu.</li>
+        <li><strong>Bước 3 - Tham vấn & Kiểm duyệt:</strong> Bản thảo được kiểm tra tính chính xác về mặt chuyên môn y khoa. Những nội dung chuyên sâu sẽ được tham vấn bởi Hội đồng Y khoa.</li>
+        <li><strong>Bước 4 - Xuất bản & Cập nhật:</strong> Bài viết được định kỳ rà soát mỗi 6 tháng - 1 năm để đảm bảo thông tin không bị lỗi thời.</li>
+      </ul>
+
+      <h2>4. Sửa chữa & Phản hồi</h2>
+      <p>Nếu phát hiện bất kỳ sai sót nào trong nội dung bài viết, chúng tôi cam kết sẽ lập tức chỉnh sửa và công khai sự điều chỉnh đó. Chúng tôi luôn hoan nghênh và trân trọng mọi ý kiến đóng góp từ độc giả và các chuyên gia y tế.</p>
+    `
   }
 ];
 
+const path = require('path');
 pages.forEach(p => {
-  fs.writeFileSync(p.file, template(p.title, p.content));
-  console.log('Created: ' + p.file);
+  const filePath = p.file;
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir, { recursive: true });
+  }
+  fs.writeFileSync(filePath, template(p.title, p.content));
+  console.log('Created: ' + filePath);
 });

@@ -14,17 +14,7 @@
 <div id="skmd-lightbox" class="skmd-lightbox" onclick="this.classList.remove('active')">
 <img id="skmd-lightbox-img" src="" alt="Zoomed image" />
 </div>
-<div id="skmd-loading" class="overlay">
-<div class="spinner"></div>
-<p style="color:var(--color-text-muted);font-weight:500">Đang chuẩn bị nội dung bài viết...</p>
-</div>
-<div id="skmd-error" class="overlay" style="display:none;">
-<span style="font-size:4rem;color:#ef4444;margin-bottom:16px"><i class="ri-error-warning-fill"></i></span>
-<h2 style="color:#ef4444;margin-bottom:8px">Không tìm thấy bài viết</h2>
-<p style="color:var(--color-text-light);margin-bottom:24px" id="skmd-err-msg">Có thể đường dẫn bị sai hoặc bài
-viết đã bị xóa.</p>
-<a href="/blog" class="skmd-btn skmd-btn--primary">Quay lại trang Blog</a>
-</div>
+
 <header class="skmd-header" id="skmd-header">
 <div class="skmd-container skmd-header__inner">
 <a href="/" class="skmd-logo">
@@ -69,7 +59,7 @@ viết đã bị xóa.</p>
 <a href="/bao-quy-dau">Bao quy đầu</a>
 </nav>
 </div>
-<div id="skmd-content-wrapper" style="opacity:0; transition: opacity 0.5s">
+<div id="skmd-content-wrapper">
 <!-- Moved Hero Section to inside skmd-article-main -->
 <div class="skmd-article-layout skmd-c">
 <aside class="skmd-article-social">
@@ -90,40 +80,27 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 </aside>
 <main class="skmd-article-main">
 <header class="skmd-article-hero" style="padding: 0 0 24px 0; background: transparent; border: none; text-align: center; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-<div class="skmd-breadcrumb" style="justify-content: center; margin-bottom: 12px; gap: 8px;">
-<a href="/">Trang Chủ</a> <span>&bull;</span>
-<a href="/blog">Chuyên Mục</a> <span>&bull;</span>
-<span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700;">Nổi bật</span>
-</div>
+{{BREADCRUMB_HTML}}
 <div style="margin-bottom: 20px;">
 <span style="display:inline-flex; align-items:center; gap:6px; padding: 6px 16px; border-radius: 30px; background: #eff6ff; color: #2563eb; font-size: 0.85rem; font-weight: 700; border: 1px solid #bfdbfe; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);"><i class="ri-verified-badge-fill" style="font-size:1.2rem;"></i> Được kiểm duyệt y khoa</span>
 </div>
-<h1 class="skmd-article-hero__title" id="skmd-title" style="text-align: center; max-width: 100%;">...</h1>
-<p class="skmd-article-hero__summary" id="skmd-summary" style="text-align: center; max-width: 100%;">...</p>
+<h1 class="skmd-article-hero__title" style="text-align: center; max-width: 100%;">{{ARTICLE_TITLE}}</h1>
+<p class="skmd-article-hero__summary" style="text-align: center; max-width: 100%;">{{ARTICLE_EXCERPT}}</p>
 <div class="skmd-trust-row" style="background:transparent; border:none; box-shadow:none; padding:0; margin-bottom:12px; gap: 8px; justify-content: center; font-size: 0.8rem;">
-<span class="skmd-trust-meta"><i class="ri-book-open-line"></i> <span id="skmd-read-time">...</span></span>
+<span class="skmd-trust-meta"><i class="ri-book-open-line"></i> <span>{{READ_TIME}} phút đọc</span></span>
 <span style="color:var(--color-border);">&bull;</span>
-<span class="skmd-trust-meta"><i class="ri-history-line"></i> <span id="skmd-date-updated">Hôm nay</span></span>
+<span class="skmd-trust-meta"><i class="ri-history-line"></i> <time datetime="{{ARTICLE_ISO_DATE}}">Cập nhật: {{ARTICLE_FORMATTED_DATE}}</time></span>
 <span class="skmd-trust-meta"><i class="ri-file-list-3-line"></i> Nguồn uy tín</span>
 </div>
 <div class="skmd-article-authors" style="border:none; padding:0; margin-bottom:20px; gap: 12px; justify-content: center;">
 <div class="skmd-article-author" style="gap:6px;">
-<div class="skmd-article-author__av" id="skmd-av1" style="width:28px; height:28px; font-size:0.75rem;">...</div>
+<div class="skmd-article-author__av" style="width:28px; height:28px; font-size:0.75rem;"><i class="ri-team-fill"></i></div>
 <div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:4px;">
-<span class="skmd-article-author__name" style="font-size:0.85rem;"><a href="#" id="skmd-author1">...</a></span>
-<span class="skmd-article-author__role" style="font-size:0.8rem; font-weight:400; text-transform:none;">(Biên tập)</span>
-</div>
-</div>
-<div class="skmd-article-author__divider" style="height:16px;"></div>
-<div class="skmd-article-author skmd-article-author--reviewer" style="gap:6px;">
-<div class="skmd-article-author__av" style="width:28px; height:28px; font-size:0.85rem; background:#e0e7ff; color:#4338ca;"><i class="ri-stethoscope-line"></i></div>
-<div class="skmd-article-author__info" style="flex-direction:row; align-items:center; gap:4px;">
-<span class="skmd-article-author__role" style="color:#4338ca; font-size:0.8rem; font-weight:400; text-transform:none;">Tham vấn:</span>
-<span class="skmd-article-author__name" style="font-size:0.85rem;"><a href="#">Hội đồng Y khoa</a></span>
+<span class="skmd-article-author__name" style="font-size:0.85rem;"><a href="/gioi-thieu/ban-bien-tap.html">Ban Biên Tập Sống Khỏe Mỗi Ngày</a></span>
 </div>
 </div>
 </div>
-<div id="skmd-thumb" style="width: 100%;"></div>
+<div id="skmd-thumb" style="width: 100%;">{{ARTICLE_THUMB_HTML}}</div>
 </header>
 <div class="skmd-mobile-toc" id="mobile-toc-container">
 <div class="skmd-mobile-toc-hdr" onclick="this.parentElement.classList.toggle('open')">
@@ -133,6 +110,7 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 <div class="skmd-mobile-toc-body" id="mobile-skmd-toc-list"></div>
 </div>
 <article class="skmd-article-content" id="skmd-html-content">
+{{ARTICLE_CONTENT}}
 </article>
 <div class="skmd-medical-disclaimer" style="margin-top: 40px; padding: 20px; background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 8px;">
 <div style="display: flex; gap: 12px; align-items: flex-start;">
@@ -159,10 +137,10 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 </div>
 </div>
 <div class="skmd-rich-author-box">
-<div class="skmd-rich-author__av" id="skmd-av2">...</div>
+<div class="skmd-rich-author__av"><i class="ri-team-fill"></i></div>
 <div class="skmd-rich-author__info">
 <span class="role">Chuyên gia nội dung</span>
-<h3 id="skmd-author2">Ban Biên Tập</h3>
+<h3><a href="/gioi-thieu/ban-bien-tap.html" style="color:inherit; text-decoration:none;">Ban Biên Tập Sống Khỏe Mỗi Ngày</a></h3>
 <p>Là đội ngũ biên tập viên giàu kinh nghiệm, chuyên tổng hợp và biên soạn các kiến thức y tế
 phức tạp thành những bài viết dễ hiểu, gần gũi, giúp người đọc dễ dàng áp dụng vào lối sống
 khỏe mạnh mỗi ngày.</p>
@@ -180,9 +158,11 @@ khỏe mạnh mỗi ngày.</p>
 <div class="skmd-sidebar-box__title"><i class="ri-list-indented"></i> Mục lục bài viết</div>
 <div class="skmd-toc-list" id="desktop-skmd-toc-list"></div>
 </div>
-<div class="skmd-sidebar-box" id="sidebar-related-container" style="display:none;">
+<div class="skmd-sidebar-box" id="sidebar-related-container">
 <div class="skmd-sidebar-box__title"><i class="ri-article-line"></i> Bài viết liên quan</div>
-<div class="skmd-sidebar-related-list" id="sidebar-related-list" style="display:flex; flex-direction:column; gap:16px;"></div>
+<div class="skmd-sidebar-related-list" style="display:flex; flex-direction:column; gap:16px;">
+{{RELATED_ARTICLES_HTML}}
+</div>
 </div>
 </div>
 </aside>
@@ -261,534 +241,131 @@ style="border:none; width:44px; height:44px;"><i class="ri-link"></i></button>
 </div>
 <script>
 (() => {
-const HYGRAPH_URLS = [
-'https://ap-south-1.cdn.hygraph.com/content/cmrezpq25018t07walir17znu/master'
-];
-const QUERY = `query GetArticle($slug: String!) {
-    baiViets(where: { slug: $slug }, first: 1) {
-        id
-        title
-        slug
-        tomtat
-        tacGia
-        createdBy { name }
-        danhmuc
-        createdAt
-        noiDung { html }
-        anh { url fileName }
-    }
-}`;
-const RELATED_QUERY = `query GetRelated {
-baiViets(orderBy: createdAt_DESC, first: 5) {
-title
-slug
-danhmuc
-anh { url }
-createdAt
-}
-}`;
-function skmdCatSlug(cat) { if(!cat)return 'tin-tuc'; const c=cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); if(c.includes('kienthuc') || c.includes('kien thuc'))return 'kien-thuc-can-biet'; if(c.includes('tri'))return 'tri'; if(c.includes('thai'))return 'dinh-chi-thai'; if(c.includes('quydau') || c.includes('quy dau'))return 'bao-quy-dau'; return 'tin-tuc'; }
-function skmdCatName(cat) {
-if (!cat) return 'Sức Khỏe';
-if (cat === 'KienThuc') return 'Kiến thức cần biết';
-if (cat === 'Tri') return 'Trĩ';
-if (cat === 'DinhChiThai') return 'Đình chỉ thai';
-if (cat === 'BaoQuyDau') return 'Bao quy đầu';
-return cat;
-}
-function skmdInitials(name) {
-if (!name) return '?';
-return name.split(' ').map(w => w[0]).filter(Boolean).slice(-2).join('').toUpperCase();
-}
-function formatDate(dateString) {
-if (!dateString) return 'Hôm nay';
-const d = new Date(dateString);
-return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
-function calculateReadTime(html) {
-if (!html) return 1;
-const text = html.replace(/<[^>]*>?/gm, '');
-const wordCount = text.split(/\s+/).length;
-const minutes = Math.ceil(wordCount / 200);
-return minutes > 0 ? minutes : 1;
-}
-        const urlParams = new URLSearchParams(window.location.search);
-        let articleSlug = urlParams.get('slug');
-        if (!articleSlug) {
-            const parts = window.location.pathname.split('/').filter(Boolean);
-            articleSlug = parts.pop();
-            if (articleSlug && articleSlug.endsWith('.html')) {
-                articleSlug = articleSlug.replace('.html', '');
-            }
-        }
-        if (!articleSlug || articleSlug === 'chi-tiet-bai-viet') articleSlug = '5-thoi-quen-buoi-sang';
-async function fetchHygraph(query, variables = {}) {
-for (const url of HYGRAPH_URLS) {
-try {
-const controller = new AbortController();
-const timer = setTimeout(() => controller.abort(), 8000);
-const res = await fetch(url, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ query, variables }),
-signal: controller.signal
-});
-clearTimeout(timer);
-let json;
-try { json = await res.json(); } catch (e) { if (!res.ok) throw new Error('HTTP ' + res.status); }
-if (json && json.errors) throw new Error(json.errors[0].message);
-if (!res.ok) throw new Error('HTTP ' + res.status);
-return json.data;
-} catch (err) {
-console.warn("Fetch failed for URL:", url, err);
-}
-}
-return null;
-}
-
-// Helpers
-function skmdCatClass(cat) {
-    if (!cat) return 'cat-default';
-    const c = cat.toLowerCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    if (c.includes('dinh') || c.includes('duong')) return 'cat-dinh-duong';
-    if (c.includes('luyen') || c.includes('tap')) return 'cat-luyen-tap';
-    if (c.includes('tinh') || c.includes('than')) return 'cat-tinh-than';
-    if (c.includes('giac') || c.includes('ngu')) return 'cat-giac-ngu';
-    if (c.includes('detox')) return 'cat-detox';
-    return 'cat-default';
-}
-
-function skmdCatSlug(cat) { 
-    if(!cat)return 'tin-tuc'; 
-    const c=cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); 
-    if(c.includes('kienthuc') || c.includes('kien thuc'))return 'kien-thuc-can-biet'; 
-    if(c.includes('tri'))return 'tri'; 
-    if(c.includes('thai'))return 'dinh-chi-thai'; 
-    if(c.includes('quydau') || c.includes('quy dau'))return 'bao-quy-dau'; 
-    return 'tin-tuc'; 
-}
-
-function skmdCatName(cat) {
-    if (!cat) return 'Sức Khỏe';
-    if (cat === 'KienThuc') return 'Kiến thức cần biết';
-    if (cat === 'Tri') return 'Trĩ';
-    if (cat === 'DinhChiThai') return 'Đình chỉ thai';
-    if (cat === 'BaoQuyDau') return 'Bao quy đầu';
-    return cat;
-}
-
-function skmdGetBasePath() {
-    let base = '/';
-    if (typeof window !== 'undefined' && window.location.pathname.includes('/songkhoemoingay/')) {
-        base = window.location.pathname.substring(0, window.location.pathname.indexOf('/songkhoemoingay/') + 17);
-    }
-    return base;
-}
-
-function skmdSlugify(str) {
-    if (!str) return '';
-    str = str.replace(/^\s+|\s+$/g, ''); // trim
-    str = str.toLowerCase();
-
-    // remove accents, swap ñ for n, etc
-    var from = "áàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ·/_,:;";
-    var to   = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyy------";
-    for (var i = 0, l = from.length; i < l; i++) {
-        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-    }
-
-    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-             .replace(/\s+/g, '-') // collapse whitespace and replace by -
-             .replace(/-+/g, '-'); // collapse dashes
-
-    return str;
-}
-
-function skmdRewriteUrl(url, filename) {
-    if (!url) return url;
-    if (url.includes('asset-proxy') || url.includes('/image/')) return url;
-    const base = skmdGetBasePath();
-    if (url.includes('graphassets.com') || url.includes('hygraph.com')) {
-        try {
-            const parsed = new URL(url);
-            const pathSegments = parsed.pathname.split('/').filter(Boolean);
-            const assetId = pathSegments[pathSegments.length - 1];
-            
-            let ext = '';
-            let baseName = filename || '';
-            const lastDot = baseName.lastIndexOf('.');
-            if (lastDot !== -1 && lastDot > baseName.length - 6) {
-                ext = baseName.substring(lastDot);
-                baseName = baseName.substring(0, lastDot);
-            }
-            
-            let cleanName = skmdSlugify(baseName);
-            if (cleanName) {
-                if (!ext) ext = '.jpg';
-                cleanName += ext;
-                return `${base}image/${assetId}/${cleanName}`;
-            } else {
-                return `${base}image/${assetId}/image.jpg`;
-            }
-        } catch (e) {
-            return url;
-        }
-    }
-    return url;
-}
-
-function skmdInitials(name) {
-    if (!name) return '?';
-    const p = name.trim().split(' ');
-    if (p.length === 1) return p[0].charAt(0).toUpperCase();
-    return (p[0].charAt(0) + p[p.length - 1].charAt(0)).toUpperCase();
-}
-
-async function initArticle() {
-        let post = null;
-        if (window.__ARTICLE_DATA__) {
-            post = window.__ARTICLE_DATA__;
-            console.log('Hydrated from SSR data');
-        } else {
-            const data = await fetchHygraph(QUERY, { slug: articleSlug });
-            post = data?.baiViets?.[0];
-        }
-if (post) {
-renderArticle(post);
-fetchRelated();
-} else {
-document.getElementById('skmd-loading').style.display = 'none';
-document.getElementById('skmd-error').style.display = 'flex';
-}
-}
-async function fetchRelated() {
-const data = await fetchHygraph(RELATED_QUERY);
-const posts = data?.baiViets || [];
-const relatedEl = document.getElementById('sidebar-related-list');
-if (posts.length > 0) {
-let html = '';
-posts.slice(0, 4).forEach((p) => {
-const img = skmdRewriteUrl(p.anh?.url) || 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop';
-html += `
-<a href="/${p.slug}" class="skmd-sidebar-related-item" style="display:flex; gap:12px; text-decoration:none; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-<div style="flex-shrink:0; width:80px; height:60px; border-radius:6px; overflow:hidden; position:relative; border: 1px solid var(--color-border);">
-<img src="${img}" alt="${p.title}" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
-</div>
-<div style="display:flex; flex-direction:column; justify-content:center;">
-<h4 style="font-size:0.85rem; font-weight:700; color:var(--color-text-main); margin-bottom:4px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.title}</h4>
-<span style="font-size:0.75rem; color:var(--color-text-muted);"><i class="ri-time-line"></i> ${formatDate(p.createdAt)}</span>
-</div>
-</a>
-`;
-});
-relatedEl.innerHTML = html;
-document.getElementById('sidebar-related-container').style.display = 'block';
-}
-}
-function renderArticle(post) {
-document.title = post.title + " - Sống Khỏe Mỗi Ngày";
-document.getElementById('skmd-title').textContent = post.title;
-const summaryEl = document.getElementById('skmd-summary');
-if (post.tomtat) {
-    summaryEl.textContent = post.tomtat;
-    summaryEl.style.display = 'block';
-} else {
-    summaryEl.style.display = 'none';
-}
-document.getElementById('skmd-cat-badge').textContent = skmdCatName(post.danhmuc);
-// Removed skmd-cat-crumb update
-document.getElementById('skmd-date-updated').textContent = formatDate(post.createdAt);
-const authorName = post.createdBy?.name || post.tacGia || "Ban Biên Tập";
-
-// Highlight correct nav item based on article category
-const catSlug = skmdCatSlug(post.danhmuc);
-document.querySelectorAll('.skmd-nav__link, .skmd-drawer__nav a').forEach(link => {
-    link.classList.remove('is-active');
-    const linkPath = link.getAttribute('href').toLowerCase();
-    if (linkPath === '/' + catSlug) {
-        link.classList.add('is-active');
-    }
-});
-const initials = skmdInitials(authorName);
-document.getElementById('skmd-author1').textContent = authorName;
-document.getElementById('skmd-av1').textContent = initials;
-document.getElementById('skmd-author2').textContent = authorName;
-document.getElementById('skmd-av2').textContent = initials;
-const thumbEl = document.getElementById('skmd-thumb');
-if (post.anh && post.anh.url) {
-const proxiedImg = skmdRewriteUrl(post.anh.url, post.anh.fileName || (post.slug + '.jpg'));
-thumbEl.innerHTML = `<img src="${proxiedImg}" class="skmd-article-hero__img" alt="${post.title}" /><div class="skmd-article-hero__caption">Ảnh minh họa chuẩn y khoa</div>`;
-}
-if (post.danhmuc) {
-document.getElementById('skmd-tags').innerHTML = `<a href="/blog" class="skmd-tag ${skmdCatClass(post.danhmuc)}">${skmdCatName(post.danhmuc)}</a> <a href="/blog" class="skmd-tag skmd-tag--gray">Sức khỏe</a>`;
-}
-const contentEl = document.getElementById('skmd-html-content');
-        if (!window.__ARTICLE_DATA__) {
-            contentEl.innerHTML = post.noiDung?.html || "<p>Nội dung đang được cập nhật...</p>";
-        }
-        // Process images inside content
-        contentEl.querySelectorAll('img').forEach(img => {
-            if (img.src && (img.src.includes('graphassets.com') || img.src.includes('hygraph.com'))) {
-                let filename = img.getAttribute('title') || img.getAttribute('alt') || 'image.png';
-                img.src = skmdRewriteUrl(img.src, filename);
+    function enhanceHTML(container) {
+        if (!container) return;
+        const images = container.querySelectorAll('img');
+        images.forEach(img => {
+            img.setAttribute('loading', 'lazy');
+            img.onclick = () => {
+                const lb = document.getElementById('skmd-lightbox-img');
+                if (lb) lb.src = img.src;
+                const modal = document.getElementById('skmd-lightbox');
+                if (modal) modal.classList.add('active');
+            };
+        });
+        const tables = container.querySelectorAll('table');
+        tables.forEach(table => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'skmd-table-wrapper';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+        const iframes = container.querySelectorAll('iframe, video');
+        iframes.forEach(el => {
+            if (!el.parentNode.classList.contains('skmd-ratio')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'skmd-ratio skmd-ratio--16-9';
+                el.parentNode.insertBefore(wrapper, el);
+                wrapper.appendChild(el);
             }
         });
-document.getElementById('skmd-read-time').textContent = calculateReadTime(post.noiDung?.html) + " phút";
-enhanceHTML(contentEl);
-document.getElementById('skmd-loading').style.display = 'none';
-document.getElementById('skmd-content-wrapper').style.opacity = '1';
-if (!window.__ARTICLE_DATA__) { skmdGenerateArticleSchema(post); }
-}
-function enhanceHTML(container) {
-const images = container.querySelectorAll('img');
-images.forEach(img => {
-img.setAttribute('loading', 'lazy');
-img.onclick = () => {
-document.getElementById('skmd-lightbox-img').src = img.src;
-document.getElementById('skmd-lightbox').classList.add('active');
-};
-});
-const tables = container.querySelectorAll('table');
-tables.forEach(table => {
-const wrapper = document.createElement('div');
-wrapper.className = 'skmd-table-wrapper';
-table.parentNode.insertBefore(wrapper, table);
-wrapper.appendChild(table);
-});
-const iframes = container.querySelectorAll('iframe, video');
-iframes.forEach(el => {
-if (!el.parentNode.classList.contains('skmd-ratio')) {
-const wrapper = document.createElement('div');
-wrapper.className = 'skmd-ratio skmd-ratio--16-9';
-el.parentNode.insertBefore(wrapper, el);
-wrapper.appendChild(el);
-}
-});
-const headings = container.querySelectorAll('h2, h3');
-const dToc = document.getElementById('desktop-skmd-toc-list');
-const mToc = document.getElementById('mobile-skmd-toc-list');
-if (headings.length > 0) {
-let tocHTML = '';
-headings.forEach((h, index) => {
-const baseId = h.textContent.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-');
-const uniqueId = `sec-${index}-${baseId}`;
-h.id = uniqueId;
-const isH3 = h.tagName.toLowerCase() === 'h3';
-const className = isH3 ? 'skmd-toc-h3' : 'toc-h2';
-tocHTML += `<a href="#${uniqueId}" class="${className}" data-target="${uniqueId}">${h.textContent}</a>`;
-});
-dToc.innerHTML = tocHTML;
-mToc.innerHTML = tocHTML;
-document.getElementById('desktop-toc-container').style.display = 'block';
-initScrollSpy();
-}
-}
-function initScrollSpy() {
-const headings = Array.from(document.querySelectorAll('.skmd-article-content h2, .skmd-article-content h3'));
-const tocLinks = document.querySelectorAll('.skmd-toc-list a');
-if (!headings.length || !window.IntersectionObserver) return;
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-const id = entry.target.id;
-tocLinks.forEach(link => {
-link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-});
-}
-});
-}, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
-headings.forEach(h => observer.observe(h));
-tocLinks.forEach(link => {
-link.addEventListener('click', (e) => {
-e.preventDefault();
-const targetId = link.getAttribute('href').substring(1);
-const targetEl = document.getElementById(targetId);
-if (targetEl) {
-window.scrollTo({ top: targetEl.offsetTop - 80, behavior: 'smooth' });
-tocLinks.forEach(l => l.classList.remove('active'));
-document.querySelectorAll(`.skmd-toc-list a[href="#${targetId}"]`).forEach(l => l.classList.add('active'));
-document.getElementById('mobile-toc-container').classList.remove('open');
-}
-});
-});
-}
-let ticking = false;
-window.addEventListener('scroll', () => {
-if (!ticking) {
-window.requestAnimationFrame(() => {
-const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-const scrolled = (winScroll / height) * 100;
-document.getElementById('skmd-progress-bar').style.width = scrolled + '%';
-ticking = false;
-});
-ticking = true;
-}
-});
-setTimeout(() => { initArticle(); }, 600);
-let faviconAttempts = 0;
-function injectLogo() {
-let fUrl = '';
-try {
-const pIcon = window.parent.document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
-if (pIcon) fUrl = pIcon.href;
-} catch (e) { }
-if (!fUrl) {
-const cIcon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
-if (cIcon) fUrl = cIcon.href;
-}
-if (fUrl) {
-document.querySelectorAll('#skmd-header-logo, #skmd-footer-logo').forEach(img => {
-img.src = fUrl;
-img.style.display = 'block';
-});
-} else if (faviconAttempts < 20) {
-faviconAttempts++;
-setTimeout(injectLogo, 200);
-} else {
-document.querySelectorAll('#skmd-header-logo, #skmd-footer-logo').forEach(img => {
-img.src = "https://ui-avatars.com/api/?name=SK&background=16a34a&color=fff";
-img.style.display = 'block';
-});
-}
-}
-setTimeout(injectLogo, 50);
-function skmdInjectSchemaGraph(schemaObj, schemaId) {
-document.querySelectorAll('.skmd-schema-graph').forEach(el => el.remove());
-const existing = document.getElementById(schemaId);
-if (existing) existing.remove();
-const script = document.createElement('script');
-script.id = schemaId;
-script.type = 'application/ld+json';
-script.textContent = JSON.stringify(schemaObj);
-document.head.appendChild(script);
-}
-function skmdGenerateArticleSchema(post) {
-const domain = window.location.origin;
-const currentUrl = window.location.href.split('?')[0];
-const fullUrl = window.location.href;
-const logoUrl = document.getElementById('skmd-header-logo')?.src || "https://ui-avatars.com/api/?name=SK&background=16a34a&color=fff";
-const authorName = post.tacGia || "Ban Biên Tập";
-const authorId = `${domain}/chuyen-gia/${authorName.toLowerCase().replace(/\s+/g, '-')}`;
-const datePub = post.createdAt ? new Date(post.createdAt).toISOString() : new Date().toISOString();
-const dateMod = post.updatedAt ? new Date(post.updatedAt).toISOString() : datePub;
-const schema = {
-"@context": "https://schema.org",
-"@graph": [
-{
-"@type": "Organization",
-"@id": `${domain}/#organization`,
-"name": "Sống Khỏe Mỗi Ngày",
-"url": domain,
-"logo": {
-"@type": "ImageObject",
-"url": logoUrl
-}
-},
-{
-"@type": "WebSite",
-"@id": `${domain}/#website`,
-"url": domain,
-"name": "Sống Khỏe Mỗi Ngày",
-"publisher": { "@id": `${domain}/#organization` }
-},
-{
-"@type": "MedicalWebPage",
-"@id": `${fullUrl}#webpage`,
-"url": fullUrl,
-"name": post.title,
-"isPartOf": { "@id": `${domain}/#website` },
-"about": { "@id": `${domain}/#organization` }
-},
-{
-"@type": "Person",
-"@id": `${authorId}#person`,
-"name": authorName,
-"url": authorId
-},
-{
-"@type": "Article",
-"@id": `${fullUrl}#article`,
-"isPartOf": { "@id": `${fullUrl}#webpage` },
-"mainEntityOfPage": { "@id": `${fullUrl}#webpage` },
-"headline": post.title,
-"description": post.tomtat || post.title,
-"image": post.anh?.url ? {
-"@type": "ImageObject",
-"url": post.anh.url
-} : undefined,
-"datePublished": datePub,
-"dateModified": dateMod,
-"author": { "@id": `${authorId}#person` },
-"publisher": { "@id": `${domain}/#organization` },
-"articleSection": skmdCatName(post.danhmuc),
-"inLanguage": "vi-VN"
-},
-{
-"@type": "BreadcrumbList",
-"@id": `${fullUrl}#breadcrumb`,
-"itemListElement": [
-{
-"@type": "ListItem",
-"position": 1,
-"name": "Trang chủ",
-"item": domain
-},
-{
-"@type": "ListItem",
-"position": 2,
-"name": "Blog",
-"item": `${domain}/blog`
-},
-{
-"@type": "ListItem",
-"position": 3,
-"name": skmdCatName(post.danhmuc),
-"item": `${domain}/${skmdCatSlug(post.danhmuc)}`
-},
-{
-"@type": "ListItem",
-"position": 4,
-"name": post.title,
-"item": fullUrl
-}
-]
-}
-]
-};
-const contentEl = document.getElementById('skmd-html-content');
-const h3s = Array.from(contentEl.querySelectorAll('h3'));
-const faqs = [];
-h3s.forEach(h3 => {
-const text = h3.textContent.trim();
-if (text.endsWith('?')) {
-let answerHTML = '';
-let nextEl = h3.nextElementSibling;
-while (nextEl && !['H2', 'H3', 'H4'].includes(nextEl.tagName)) {
-answerHTML += nextEl.outerHTML || nextEl.textContent;
-nextEl = nextEl.nextElementSibling;
-}
-if (answerHTML) {
-faqs.push({
-"@type": "Question",
-"name": text,
-"acceptedAnswer": {
-"@type": "Answer",
-"text": answerHTML
-}
-});
-}
-}
-});
-if (faqs.length > 0) {
-schema["@graph"].push({
-"@type": "FAQPage",
-"@id": `${fullUrl}#faq`,
-"mainEntity": faqs
-});
-}
-skmdInjectSchemaGraph(schema, 'skmd-schema-article');
-}
+        const headings = container.querySelectorAll('h2, h3');
+        const dToc = document.getElementById('desktop-skmd-toc-list');
+        const mToc = document.getElementById('mobile-skmd-toc-list');
+        if (headings.length > 0 && dToc && mToc) {
+            let tocHTML = '';
+            headings.forEach((h, index) => {
+                let baseId = h.textContent.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-');
+                if (!baseId) baseId = 'heading';
+                const uniqueId = `sec-${index}-${baseId}`;
+                h.id = uniqueId;
+                const isH3 = h.tagName.toLowerCase() === 'h3';
+                const className = isH3 ? 'skmd-toc-h3' : 'toc-h2';
+                tocHTML += `<a href="#${uniqueId}" class="${className}" data-target="${uniqueId}">${h.textContent}</a>`;
+            });
+            dToc.innerHTML = tocHTML;
+            mToc.innerHTML = tocHTML;
+            document.getElementById('desktop-toc-container').style.display = 'block';
+            initScrollSpy();
+        }
+    }
+
+    function initScrollSpy() {
+        const headings = Array.from(document.querySelectorAll('.skmd-article-content h2, .skmd-article-content h3'));
+        const tocLinks = document.querySelectorAll('.skmd-toc-list a');
+        if (!headings.length || !window.IntersectionObserver) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+        headings.forEach(h => observer.observe(h));
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    window.scrollTo({ top: targetEl.offsetTop - 80, behavior: 'smooth' });
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    document.querySelectorAll(`.skmd-toc-list a[href="#${targetId}"]`).forEach(l => l.classList.add('active'));
+                    const mobContainer = document.getElementById('mobile-toc-container');
+                    if (mobContainer) mobContainer.classList.remove('open');
+                }
+            });
+        });
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                const progress = document.getElementById('skmd-progress-bar');
+                if (progress) progress.style.width = scrolled + '%';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    let faviconAttempts = 0;
+    function injectLogo() {
+        let fUrl = '';
+        try {
+            const pIcon = window.parent.document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
+            if (pIcon) fUrl = pIcon.href;
+        } catch (e) { }
+        if (!fUrl) {
+            const cIcon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
+            if (cIcon) fUrl = cIcon.href;
+        }
+        if (fUrl) {
+            document.querySelectorAll('#skmd-header-logo, #skmd-footer-logo').forEach(img => {
+                img.src = fUrl;
+                img.style.display = 'block';
+            });
+        } else if (faviconAttempts < 20) {
+            faviconAttempts++;
+            setTimeout(injectLogo, 200);
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const contentEl = document.getElementById('skmd-html-content');
+        if (contentEl) {
+            enhanceHTML(contentEl);
+            document.getElementById('skmd-content-wrapper').style.opacity = '1';
+        }
+        setTimeout(injectLogo, 50);
+    });
 })();
 </script>
 <script>
