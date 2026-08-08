@@ -74,10 +74,10 @@ function renderBreadcrumb(article) {
     return `
 <nav aria-label="Breadcrumb" class="skmd-breadcrumb" style="justify-content: center; margin-bottom: 12px; gap: 8px;">
     <ol style="list-style:none; padding:0; margin:0; display:flex; gap:8px;">
-        <li><a href="${CONFIG.SITE_URL}">Trang Chủ</a> <span>&bull;</span></li>
-        <li><a href="${CONFIG.SITE_URL}/blog">Blog</a> <span>&bull;</span></li>
-        <li><a href="${catUrl}">${article.category.name}</a> <span>&bull;</span></li>
-        <li><span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700;" aria-current="page">${article.title}</span></li>
+        <li style="display:flex; align-items:center; gap:8px;"><a href="${CONFIG.SITE_URL}">Trang Chủ</a> <span>&bull;</span></li>
+        <li style="display:flex; align-items:center; gap:8px;"><a href="${CONFIG.SITE_URL}/blog">Blog</a> <span>&bull;</span></li>
+        <li style="display:flex; align-items:center; gap:8px;"><a href="${catUrl}">${article.category.name}</a> <span>&bull;</span></li>
+        <li style="display:flex; align-items:center;"><span id="skmd-cat-badge" style="color:var(--color-primary-dark); font-weight:700;" aria-current="page">${article.title}</span></li>
     </ol>
 </nav>
     `;
