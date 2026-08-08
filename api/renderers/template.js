@@ -77,7 +77,8 @@ function renderBreadcrumb(article) {
     <ol style="list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; justify-content:flex-start; gap:8px;">
         <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${CONFIG.SITE_URL}">Trang Chủ</a> <span>&bull;</span></li>
         <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${CONFIG.SITE_URL}/blog">Blog</a> <span>&bull;</span></li>
-        <li style="display:flex; align-items:center; white-space:nowrap;"><a href="${catUrl}" style="color:var(--color-primary-dark); font-weight:700;" aria-current="page">${article.category.name}</a></li>
+        <li style="display:flex; align-items:center; gap:8px; white-space:nowrap;"><a href="${catUrl}">${article.category.name}</a> <span>&bull;</span></li>
+        <li style="display:flex; align-items:center; white-space:nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis;"><span style="color:var(--color-primary-dark); font-weight:700;" aria-current="page">${article.title}</span></li>
     </ol>
 </nav>
     `;
@@ -131,6 +132,7 @@ function renderHtml(article, seoHeadStr, schemaScriptStr, rawRelated) {
     html = html.replace('{{READ_TIME}}', () => calculateReadTime(article.contentHtml));
     html = html.replace('{{ARTICLE_ISO_DATE}}', () => article.dates.modified || article.dates.published);
     html = html.replace('{{ARTICLE_FORMATTED_DATE}}', () => formatDate(article.dates.modified || article.dates.published));
+    html = html.replace(/{{SITE_LOGO}}/g, () => CONFIG.SITE_LOGO || CONFIG.DEFAULT_OG_IMAGE);
     
     html = html.replace('{{BREADCRUMB_HTML}}', () => renderBreadcrumb(article));
     html = html.replace('{{RELATED_ARTICLES_HTML}}', () => renderRelatedArticles(rawRelated));

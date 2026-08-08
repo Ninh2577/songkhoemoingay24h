@@ -18,7 +18,7 @@
 <header class="skmd-header" id="skmd-header">
 <div class="skmd-container skmd-header__inner">
 <a href="/" class="skmd-logo">
-<img id="skmd-header-logo" src="" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px; object-fit: contain; display: none;" onload="this.style.display='block'" onerror="this.style.display='none'" />
+<img id="skmd-header-logo" src="{{SITE_LOGO}}" alt="Logo" style="width: 36px; height: 36px; border-radius: 8px; object-fit: contain;" />
 <div class="skmd-logo__text">
 <span class="skmd-logo__name">Sống Khỏe</span>
 <span class="skmd-logo__sub">Mỗi Ngày</span>
@@ -122,8 +122,8 @@ title="Copy Link"><i class="ri-links-fill"></i></button>
 <div class="skmd-article-tags" id="skmd-tags"></div>
 <div class="skmd-policy-box" style="margin-top: 32px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
 <div style="padding: 24px; border-bottom: 1px solid #e2e8f0;">
-<h4 style="font-size:1.05rem; font-weight:700; color:#1e293b; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><i class="ri-shield-check-fill" style="color:#10b981; font-size:1.2rem;"></i> Chính sách biên tập & Kiểm duyệt y khoa</h4>
-<p style="font-size:0.9rem; color:#475569; line-height:1.6; margin-bottom:8px;">Tất cả nội dung trên <strong>Sống Khỏe Mỗi Ngày</strong> đều được trải qua quy trình kiểm duyệt nghiêm ngặt bởi Hội đồng Y khoa. Chúng tôi cam kết sử dụng các nguồn tài liệu tham khảo y tế uy tín, tạp chí khoa học và hướng dẫn từ các tổ chức y tế thế giới.</p>
+<h4 style="font-size:1.05rem; font-weight:700; color:#1e293b; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><i class="ri-shield-check-fill" style="color:#10b981; font-size:1.2rem;"></i> Chính sách biên tập nội dung</h4>
+<p style="font-size:0.9rem; color:#475569; line-height:1.6; margin-bottom:8px;">Tất cả nội dung trên <strong>Sống Khỏe Mỗi Ngày</strong> đều được trải qua quy trình biên tập nghiêm ngặt bởi Ban Biên tập. Chúng tôi cam kết sử dụng các nguồn tài liệu tham khảo y tế uy tín, tạp chí khoa học và hướng dẫn từ các tổ chức y tế thế giới.</p>
 </div>
 <div style="padding: 24px; background: #fff;">
 <h4 style="font-size:1.05rem; font-weight:700; color:#1e293b; margin-bottom:12px; display:flex; align-items:center; gap:8px;"><i class="ri-book-3-fill" style="color:#3b82f6; font-size:1.2rem;"></i> Nguồn tham khảo (Sources)</h4>
@@ -182,7 +182,7 @@ khỏe mạnh mỗi ngày.</p>
 <div class="skmd-container skmd-footer__inner">
 <div class="skmd-footer__brand">
 <a href="/" class="skmd-logo">
-<img id="skmd-footer-logo" src="" alt="Logo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: contain; display: none;" onload="this.style.display='block'" onerror="this.style.display='none'" />
+<img id="skmd-footer-logo" src="{{SITE_LOGO}}" alt="Logo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: contain;" />
 <div class="skmd-logo__text">
 <span class="skmd-logo__name" style="color:#fff">Sống Khỏe</span>
 <span class="skmd-logo__sub" style="color:var(--color-primary-light)">Mỗi Ngày</span>
@@ -244,20 +244,12 @@ style="border:none; width:44px; height:44px;"><i class="ri-link"></i></button>
         if (!container) return;
         const images = container.querySelectorAll('img');
         images.forEach(img => {
-            img.setAttribute('loading', 'lazy');
             img.onclick = () => {
                 const lb = document.getElementById('skmd-lightbox-img');
                 if (lb) lb.src = img.src;
                 const modal = document.getElementById('skmd-lightbox');
                 if (modal) modal.classList.add('active');
             };
-        });
-        const tables = container.querySelectorAll('table');
-        tables.forEach(table => {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'skmd-table-wrapper';
-            table.parentNode.insertBefore(wrapper, table);
-            wrapper.appendChild(table);
         });
         const iframes = container.querySelectorAll('iframe, video');
         iframes.forEach(el => {
@@ -335,35 +327,11 @@ style="border:none; width:44px; height:44px;"><i class="ri-link"></i></button>
         }
     });
 
-    let faviconAttempts = 0;
-    function injectLogo() {
-        let fUrl = '';
-        try {
-            const pIcon = window.parent.document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
-            if (pIcon) fUrl = pIcon.href;
-        } catch (e) { }
-        if (!fUrl) {
-            const cIcon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
-            if (cIcon) fUrl = cIcon.href;
-        }
-        if (fUrl) {
-            document.querySelectorAll('#skmd-header-logo, #skmd-footer-logo').forEach(img => {
-                img.src = fUrl;
-                img.style.display = 'block';
-            });
-        } else if (faviconAttempts < 20) {
-            faviconAttempts++;
-            setTimeout(injectLogo, 200);
-        }
-    }
-    
     document.addEventListener("DOMContentLoaded", () => {
         const contentEl = document.getElementById('skmd-html-content');
         if (contentEl) {
             enhanceHTML(contentEl);
-            document.getElementById('skmd-content-wrapper').style.opacity = '1';
         }
-        setTimeout(injectLogo, 50);
     });
 })();
 </script>

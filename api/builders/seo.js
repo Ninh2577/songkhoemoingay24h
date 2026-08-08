@@ -1,9 +1,19 @@
 const CONFIG = require('../config');
 const { escapeHtml } = require('../utils/helpers');
 
+function sanitizeYmyl(text) {
+    if (!text) return text;
+    return text
+        .replace(/lời khuyên từ chuyên gia phụ sản/gi, "Ban Biên tập Sống Khỏe Mỗi Ngày")
+        .replace(/chuyên gia y tế/gi, "Ban Biên tập")
+        .replace(/đội ngũ bác sĩ/gi, "đội ngũ biên tập")
+        .replace(/kiểm duyệt y khoa/gi, "biên tập nội dung")
+        .replace(/chuyên gia của chúng tôi/gi, "Ban Biên tập");
+}
+
 function buildSeoHead(article) {
     const title = escapeHtml(article.title + CONFIG.TITLE_SUFFIX);
-    const description = escapeHtml(article.excerpt || CONFIG.DEFAULT_DESCRIPTION);
+    const description = escapeHtml(sanitizeYmyl(article.excerpt || CONFIG.DEFAULT_DESCRIPTION));
     const imageUrl = article.coverImage || CONFIG.DEFAULT_OG_IMAGE;
     const url = `${CONFIG.SITE_URL}/${article.slug}`;
 
@@ -27,11 +37,11 @@ function buildSeoHead(article) {
         <meta property="article:section" content="${escapeHtml(article.category.name)}" />
         
         <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="${url}" />
-        <meta property="twitter:title" content="${title}" />
-        <meta property="twitter:description" content="${description}" />
-        <meta property="twitter:image" content="${imageUrl}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="${url}" />
+        <meta name="twitter:title" content="${title}" />
+        <meta name="twitter:description" content="${description}" />
+        <meta name="twitter:image" content="${imageUrl}" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     `;
 }
